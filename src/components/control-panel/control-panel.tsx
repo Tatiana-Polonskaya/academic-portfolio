@@ -5,7 +5,7 @@ import Sorted from "../sorted/sorted";
 
 export default function ControlPanel() {
   return (
-    <div class="d-flex p-2 flex-row justify-content-between align-items-center align-self-center gap-2">
+    <div class="d-flex p-2 flex-row justify-content-between align-items-center align-self-center gap-2 ">
       <Filter />
       <Sorted />
       <Search />
