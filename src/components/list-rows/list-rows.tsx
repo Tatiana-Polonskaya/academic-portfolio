@@ -10,13 +10,13 @@ export default function ListRows(props: Props) {
   const titles = ["id", "title", "body"];
 
   return (
-    <table class="table-primary table-hover table-bordered align-middle">
+    <table class="table table-striped table-hover align-middle">
       <thead>
         <tr>
           <For each={titles}>{(title) => <th scope="col">{title}</th>}</For>
         </tr>
       </thead>
-      <tbody>
+      <tbody class="table-group-divider">
         <For each={props.articles}>
           {(article) => <Row article={article} />}
         </For>
