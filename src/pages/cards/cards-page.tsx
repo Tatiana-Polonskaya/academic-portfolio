@@ -4,7 +4,7 @@ import ListCards from "../../components/list-cards/list-cards";
 import { fetchImages } from "../../api/api";
 import { createResource } from "solid-js";
 
-export default function ContactPage() {
+export default function CardsPage() {
   const [data] = createResource(true, fetchImages);
   return (
     <BaseLayout>
