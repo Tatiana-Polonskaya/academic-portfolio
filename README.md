@@ -1,34 +1,46 @@
-## Usage
+# Портфолио для ведения академических достижений студента
 
-Those templates dependencies are maintained via [pnpm](https://pnpm.io) via `pnpm up -Lri`.
+**О проекте:**
+  Сайт создан для помощи в хранении и ведении академических достижений студента, таких как: публикация статьи/тезиса в журналах и сборниках, участие в конкурсе/соревновании/хакатоне с наличием диплома, прохождение дополнительных курсов, повышение квалификации. 
 
-This is the reason you see a `pnpm-lock.yaml`. That being said, any package manager will work. This file can be safely be removed once you clone a template.
 
-```bash
-$ npm install # or pnpm install or yarn install
-```
+**Функционал:**
+- Главная страница:
+  - Вывод статистики по публикациям
+  - Вывод инфографики
+  - Общая информация
+- Страница Статьи:
+  - Получение и вывод статей
+- Страница Дипломы:
+  - Получение и вывод дипломов
+- Страница Курсы:
+  - Запрос на получение информации о курсах
 
-### Learn more on the [Solid Website](https://solidjs.com) and come chat with us on our [Discord](https://discord.com/invite/solidjs)
+----
+## Содержание
+- [Запуск проекта](#запуск-проекта)
+- [Архитектура проекта](#архитектура-проекта)
+- [Технологии](#технологии)
+- [API](#api)
 
-## Available Scripts
+## Запуск проекта
 
-In the project directory, you can run:
+- `npm install` - Установка зависимостей
+- `npm run dev` - Запуск проекта для разработки
+- `npm run build` - Сборка проекта
 
-### `npm run dev` or `npm start`
+## Архитектура проекта
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Проект реализован в соответствии со стандартной архитектурой компонентов.
 
-The page will reload if you make edits.<br>
 
-### `npm run build`
+## Технологии
 
-Builds the app for production to the `dist` folder.<br>
-It correctly bundles Solid in production mode and optimizes the build for the best performance.
+- [Vite](https://vitejs.dev/)
+- [SolidJS](https://www.solidjs.com/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Bootstrap](https://bootstrap-5.ru/)
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+## API
 
-## Deployment
-
-You can deploy the `dist` folder to any static host provider (netlify, surge, now, etc.)
+- [JSON Placeholder](https://jsonplaceholder.typicode.com/)
