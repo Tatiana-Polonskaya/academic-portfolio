@@ -8,7 +8,7 @@ type Props = {
 
 export default function ListCards(props: Props) {
   return (
-    <div class="row justify-content-center  gap-3 text-center">
+    <div class="row justify-content-center gap-3 text-center">
       <For each={props.cards}>{(item) => <Card card={item} />}</For>
     </div>
   );

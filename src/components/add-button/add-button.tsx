@@ -1,17 +1,15 @@
+import { A } from "@solidjs/router";
+
 type Props = {
-  onClick: () => void;
+  link: string;
 };
 
 const TITLE = "Добавить";
 
 export default function AddButton(props: Props) {
   return (
-    <button
-      type="button"
-      class="btn btn-success"
-      onClick={() => props.onClick()}
-    >
+    <A class="btn btn-success" href={props.link}>
       <i class="bi bi-plus-lg" /> {TITLE}
-    </button>
+    </A>
   );
 }

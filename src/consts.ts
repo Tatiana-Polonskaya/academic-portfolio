@@ -3,6 +3,7 @@ export enum Routers {
   Main = "/",
   Cards = "/cards",
   Articles = "/articles",
+  AddArticle = "/articles/add",
   Article = "/articles/:id",
 }
 

@@ -30,12 +30,7 @@ export default function Header() {
               </A>
             </li>
             <li class="nav-item">
-              <A
-                class="nav-link"
-                href={Routers.Articles}
-                activeClass="active"
-                end
-              >
+              <A class="nav-link" href={Routers.Articles} activeClass="active">
                 Посты
               </A>
             </li>

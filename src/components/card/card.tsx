@@ -7,7 +7,7 @@ type Props = {
 
 export default function Card(props: Props) {
   return (
-    <div class="card" style={{ width: "18rem" }}>
+    <div class="card" style={{ width: "15rem" }}>
       <img
         src={props.card.thumbnailUrl}
         class="card-img-top"

@@ -9,7 +9,6 @@ export default function BaseLayout(props) {
     <div class="container-fluid">
       <Header />
       <div class="container-fluid">{resolved()}</div>
-
       <Footer />
     </div>
   );
