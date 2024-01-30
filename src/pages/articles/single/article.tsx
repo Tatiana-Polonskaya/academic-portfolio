@@ -6,7 +6,7 @@ import Spinner from "../../../components/spinner/spinner";
 
 export default function SingleArticlePage() {
   const params = useParams();
-  const [data] = createResource(Number(params.id), fetchArticleById);
+  const [data] = createResource(params.id, fetchArticleById);
 
   return (
     <BaseLayout>
@@ -14,6 +14,7 @@ export default function SingleArticlePage() {
         <p>Article №{params.id}</p>
         <Suspense fallback={<Spinner />}>
           <div>{data() && data().title}</div>
+          <div>{data() && data().status}</div>
           <div>{data() && data().conference}</div>
         </Suspense>
       </div>

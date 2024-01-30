@@ -8,7 +8,7 @@ export async function fetchArticles(): Promise<Article[]> {
   });
 }
 
-export async function fetchArticleById(id: number): Promise<Article> {
+export async function fetchArticleById(id: string): Promise<Article> {
   return fetch(`${URL}/articles/${id}`).then((response) => response.json());
 }
 
