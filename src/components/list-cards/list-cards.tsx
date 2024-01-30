@@ -1,15 +1,17 @@
 import { For } from "solid-js";
 import Card from "../card/card";
-import { TCard } from "../../consts";
+import { Achievement } from "../../consts";
 
 type Props = {
-  cards: TCard[];
+  achievements: Achievement[];
 };
 
 export default function ListCards(props: Props) {
   return (
     <div class="row justify-content-center gap-3 text-center">
-      <For each={props.cards}>{(item) => <Card card={item} />}</For>
+      <For each={props.achievements}>
+        {(item) => <Card achievement={item} />}
+      </For>
     </div>
   );
 }

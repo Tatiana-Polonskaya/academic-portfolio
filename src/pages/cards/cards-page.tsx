@@ -15,7 +15,7 @@ export default function CardsPage() {
         <Caption mainText={"Дипломы"} />
         <ControlPanel />
         <Suspense fallback={<Spinner />}>
-          <ListCards cards={data()} />
+          <ListCards achievements={data()} />
         </Suspense>
       </div>
     </BaseLayout>

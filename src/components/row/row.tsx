@@ -12,12 +12,12 @@ export default function Row(props: Props) {
       class="g-2"
       style={{ cursor: "pointer" }}
       onClick={() =>
-        navigate(Routers.Article.replace(":id", `${props.article.id}`))
+        navigate(Routers.Article.replace(":id", `${props.article.index}`))
       }
     >
-      <td>{props.article.id}</td>
+      <td>{props.article.index}</td>
       <td>{props.article.title}</td>
-      <td>{props.article.body}</td>
+      <td>{props.article.conference}</td>
     </tr>
   );
 }

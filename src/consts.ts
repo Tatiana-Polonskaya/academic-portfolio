@@ -2,20 +2,25 @@
 export enum Routers {
   Main = "/",
   Cards = "/cards",
+  Achievement = "/achievement/:id",
   Articles = "/articles",
   AddArticle = "/articles/add",
   Article = "/articles/:id",
 }
 
 export type Article = {
-  id: number;
+  index: string;
   title: string;
-  body: string;
+  year: string;
+  conference: string;
+  status: number;
+  link: string;
 };
 
-export type TCard = {
-  id: number;
+export type Achievement = {
+  index: string;
+  date: string;
   title: string;
-  url: string;
-  thumbnailUrl: string;
+  link: string;
+  img: string;
 };

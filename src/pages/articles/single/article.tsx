@@ -14,7 +14,7 @@ export default function SingleArticlePage() {
         <p>Article №{params.id}</p>
         <Suspense fallback={<Spinner />}>
           <div>{data() && data().title}</div>
-          <div>{data() && data().body}</div>
+          <div>{data() && data().conference}</div>
         </Suspense>
       </div>
     </BaseLayout>

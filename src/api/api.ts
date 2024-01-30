@@ -1,21 +1,17 @@
-import { Article, TCard } from "../consts";
+import { Article, Achievement } from "../consts";
+
+const URL = "https://fastapi-production-fd80.up.railway.app";
 
 export async function fetchArticles(): Promise<Article[]> {
-  return fetch(`https://jsonplaceholder.typicode.com/posts?_limit=20`).then(
-    (response) => {
-      return response.json();
-    }
-  );
+  return fetch(`${URL}/articles`).then((response) => {
+    return response.json();
+  });
 }
 
 export async function fetchArticleById(id: number): Promise<Article> {
-  return fetch(`https://jsonplaceholder.typicode.com/posts/${id}`).then(
-    (response) => response.json()
-  );
+  return fetch(`${URL}/articles/${id}`).then((response) => response.json());
 }
 
-export async function fetchImages(): Promise<TCard[]> {
-  return fetch(`https://jsonplaceholder.typicode.com/photos?_limit=10`).then(
-    (response) => response.json()
-  );
+export async function fetchImages(): Promise<Achievement[]> {
+  return fetch(`${URL}/achievements`).then((response) => response.json());
 }
