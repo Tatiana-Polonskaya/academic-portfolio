@@ -1,3 +1,4 @@
+import { postArticle } from "../../api/api";
 import { FormArticle, STATUS_ARTICLE, useForm } from "../../hooks/use-form";
 
 export default function AddForm() {
@@ -13,8 +14,14 @@ export default function AddForm() {
 
   const curentForm = form as FormArticle;
 
-  const handleSubmit = (event: Event): void => {
+  const handleSubmit = async (event: Event) => {
     event.preventDefault();
+
+    const res = await postArticle({
+      ...curentForm,
+      year: Number(curentForm.year),
+    });
+    console.log(res);
     // submit(form);
   };
 

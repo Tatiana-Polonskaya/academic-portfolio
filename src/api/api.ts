@@ -17,7 +17,7 @@ export async function fetchAchievements(): Promise<Achievement[]> {
   return fetch(`${URL}/achievements`).then((response) => response.json());
 }
 
-export async function postArticle(data: FormArticle): Promise<Article> {
+export async function postArticle(data: any): Promise<Article> {
   return fetch(`${URL}/articles`, {
     method: "POST",
     body: JSON.stringify(data),
