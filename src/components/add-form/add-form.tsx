@@ -1,10 +1,14 @@
+import { Show, createEffect, createSignal, on } from "solid-js";
 import { postArticle } from "../../api/api";
-import { FormArticle, STATUS_ARTICLE, useForm } from "../../hooks/use-form";
+import { STATUS_ARTICLE, useForm } from "../../hooks/use-form";
 
 export default function AddForm() {
   const currentYear = new Date().getFullYear();
 
-  const { form, updateFormField } = useForm({
+  const [error, setError] = createSignal("");
+  const [message, setMessage] = createSignal("");
+
+  const { form, updateFormField, clearAllField } = useForm({
     title: "",
     year: String(currentYear),
     conference: "",
@@ -12,27 +16,34 @@ export default function AddForm() {
     link: "",
   });
 
-  const curentForm = form as FormArticle;
+  createEffect(on(message, () => setTimeout(() => setMessage(""), 10000)));
 
   const handleSubmit = async (event: Event) => {
     event.preventDefault();
+    const res = await postArticle(form);
 
-    const res = await postArticle({
-      ...curentForm,
-      year: Number(curentForm.year),
-    });
-    console.log(res);
-    // submit(form);
+    if (res.status === 200) {
+      setError("");
+      clearAllField();
+      setMessage("Запись успешно добавлена");
+    } else {
+      setError(`Error:${res.status} ${res.statusText}`);
+      setMessage("");
+    }
   };
-
-  //   createEffect(() => {
-  //     if (form.sameAsAddress) {
-  //       clearField("shippingAddress");
-  //     }
-  //   });
 
   return (
     <div class="container-fluid text-start">
+      <Show when={error()}>
+        <div class="alert alert-danger" role="alert">
+          {error()}
+        </div>
+      </Show>
+      <Show when={message()}>
+        <div class="alert alert-success" role="alert">
+          {message()}
+        </div>
+      </Show>
       <form onSubmit={handleSubmit}>
         <div class="mb-3">
           <label for="title-article-input" class="form-label">
@@ -45,6 +56,8 @@ export default function AddForm() {
             placeholder="Ваше название статьи"
             aria-describedby="emailHelp"
             onChange={updateFormField("title")}
+            value={form.title}
+            required
           />
           <div id="emailHelp" class="form-text">
             Мы никогда никому не передадим вашу электронную почту.
@@ -60,6 +73,8 @@ export default function AddForm() {
             id="conference-article-input"
             placeholder="Название конференции, журнала или сборника"
             onChange={updateFormField("conference")}
+            value={form.conference}
+            required
           />
         </div>
         <div class="mb-3">
@@ -72,8 +87,9 @@ export default function AddForm() {
             id="year-article-input"
             min={2000}
             max={currentYear + 1}
-            value={curentForm.year}
+            value={form.year}
             onChange={updateFormField("year")}
+            required
           />
         </div>
         <div class="mb-3">
@@ -86,6 +102,7 @@ export default function AddForm() {
             id="link-article-input"
             placeholder="https://...."
             onChange={updateFormField("link")}
+            value={form.link}
           />
         </div>
 
@@ -98,7 +115,7 @@ export default function AddForm() {
               name="flexRadioDefault"
               id="check-publish-input"
               onChange={updateFormField("status", STATUS_ARTICLE.PUBLISHED)}
-              checked={curentForm.status === STATUS_ARTICLE.PUBLISHED}
+              checked={form.status === STATUS_ARTICLE.PUBLISHED}
             />
             <label class="form-check-label" for="check-publish-input">
               Опубликована
@@ -111,7 +128,7 @@ export default function AddForm() {
               name="flexRadioDefault"
               id="check-add-publish-input"
               onChange={updateFormField("status", STATUS_ARTICLE.NOT_PUBLISHED)}
-              checked={curentForm.status === STATUS_ARTICLE.NOT_PUBLISHED}
+              checked={form.status === STATUS_ARTICLE.NOT_PUBLISHED}
             />
             <label class="form-check-label" for="check-add-publish-input">
               Принята к публикации
@@ -124,7 +141,6 @@ export default function AddForm() {
           </button>
         </div>
       </form>
-      <pre>{JSON.stringify(form, null, 2)}</pre>
     </div>
   );
 }

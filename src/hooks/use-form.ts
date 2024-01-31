@@ -9,12 +9,22 @@ export enum STATUS_ARTICLE {
 export type FormArticle = Omit<Article, "index">;
 export type FormAchievement = Omit<Achievement, "index">;
 
-function useForm(initial: FormAchievement | FormArticle) {
-  const [form, setForm] = createStore<typeof initial>(initial);
+function useForm(initial: FormArticle) {
+  const [form, setForm] = createStore<FormArticle>(initial);
 
   const clearField = (fieldName: string, clearValue: string | number) => {
     setForm({
       [fieldName]: clearValue,
+    });
+  };
+
+  const clearAllField = () => {
+    setForm({
+      title: "",
+      year: "2022",
+      conference: "",
+      status: STATUS_ARTICLE.PUBLISHED,
+      link: "",
     });
   };
 
@@ -27,7 +37,7 @@ function useForm(initial: FormAchievement | FormArticle) {
       });
     };
 
-  return { form, updateFormField, clearField };
+  return { form, updateFormField, clearField, clearAllField };
 }
 
 export { useForm };
