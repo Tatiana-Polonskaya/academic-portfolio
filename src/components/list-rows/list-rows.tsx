@@ -6,14 +6,13 @@ type Props = {
   articles: Article[];
 };
 
-//TODO: добавить цвет в зависимости от статуса
 //TODO: сделать получение названий таблицы с бека
 
 export default function ListRows(props: Props) {
   const titles = ["№", "Название", "Конференция", "Год"];
 
   return (
-    <table class="table table-striped table-hover align-middle">
+    <table class="table table-hover align-middle">
       <thead>
         <tr>
           <For each={titles}>{(title) => <th scope="col">{title}</th>}</For>

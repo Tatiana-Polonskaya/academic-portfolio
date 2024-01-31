@@ -1,5 +1,6 @@
 import { useNavigate } from "@solidjs/router";
 import { Article, Routers } from "../../consts";
+import { STATUS_ARTICLE } from "../../hooks/use-form";
 
 type Props = {
   id: number;
@@ -12,6 +13,9 @@ export default function Row(props: Props) {
     <tr
       class="g-2"
       style={{ cursor: "pointer" }}
+      classList={{
+        "table-warning": props.article.status === STATUS_ARTICLE.NOT_PUBLISHED,
+      }}
       onClick={() =>
         navigate(Routers.Article.replace(":id", `${props.article.index}`))
       }

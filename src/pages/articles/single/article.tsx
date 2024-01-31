@@ -10,14 +10,12 @@ export default function SingleArticlePage() {
 
   return (
     <BaseLayout>
-      <div>
-        <p>Article №{params.id}</p>
-        <Suspense fallback={<Spinner />}>
-          <div>{data() && data().title}</div>
-          <div>{data() && data().status}</div>
-          <div>{data() && data().conference}</div>
-        </Suspense>
-      </div>
+      <p>Article №{params.id}</p>
+      <Suspense fallback={<Spinner />}>
+        <div>{data() && data().title}</div>
+        <div>{data() && data().status}</div>
+        <div>{data() && data().conference}</div>
+      </Suspense>
     </BaseLayout>
   );
 }
