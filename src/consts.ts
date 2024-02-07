@@ -5,17 +5,11 @@ export enum Routers {
   Achievement = "/achievement/:id",
   Articles = "/articles",
   AddArticle = "/articles/add",
+  EditArticle = "/articles/:id/edit",
   Article = "/articles/:id",
 }
 
-export type Article = {
-  index: string;
-  title: string;
-  year: string;
-  conference: string;
-  status: number;
-  link: string;
-};
+
 
 export type Achievement = {
   index: string;

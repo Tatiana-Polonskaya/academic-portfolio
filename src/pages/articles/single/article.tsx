@@ -1,18 +1,34 @@
-import { A, useParams } from "@solidjs/router";
+import { A, useNavigate, useParams } from "@solidjs/router";
 import { Suspense, createResource } from "solid-js";
-import { fetchArticleById } from "../../../api/api";
+import { deleteArticleById, fetchArticleById } from "../../../api/api";
 import BaseLayout from "../../../layouts/base/base-layout";
 import Spinner from "../../../components/spinner/spinner";
 import Caption from "../../../components/caption/caption";
 import ButtonBack from "../../../components/button-back/button-back";
+import { Routers } from "../../../consts";
+
+//TODO: добавить обработку ошибок при удалении
+//TODO: добавить модальное окно перед удалением
+//TODO: добавить библиографическую запись
 
 export default function SingleArticlePage() {
+  const navigate = useNavigate();
   const params = useParams();
   const [data] = createResource(params.id, fetchArticleById);
 
+  const handleDeleteClick = async () => {
+    if (!params.id) return;
+    const res = await deleteArticleById(params.id);
+    if (res.ok) {
+      navigate(Routers.Articles);
+    } else {
+      console.log(res);
+    }
+  };
+
   return (
     <BaseLayout>
-      <div class="d-flex flex-column mb-3">
+      <div class="d-flex flex-column mb-3 ps-4 pe-4 ms-2 me-2">
         <ButtonBack />
         <Suspense fallback={<Spinner />}>
           <div class="d-flex flex-row justify-content-between align-items-center">
@@ -21,12 +37,18 @@ export default function SingleArticlePage() {
               <button
                 type="button"
                 class="btn btn-outline-primary align-self-center"
+                onClick={() =>
+                  navigate(Routers.EditArticle.replace(":id", params.id), {
+                    state: { id: params.id, article: data() },
+                  })
+                }
               >
                 <i class="bi bi-pencil-fill" />
               </button>
               <button
                 type="button"
                 class="btn btn-outline-danger align-self-center"
+                onClick={handleDeleteClick}
               >
                 <i class="bi bi-trash-fill" />
               </button>
@@ -59,6 +81,7 @@ export default function SingleArticlePage() {
               </tr>
             </tbody>
           </table>
+          <div class="container-fluid p-2">Запись</div>
         </Suspense>
       </div>
     </BaseLayout>

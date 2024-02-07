@@ -1,31 +1,59 @@
-import { Show, createEffect, createSignal, on } from "solid-js";
-import { postArticle } from "../../api/api";
-import { STATUS_ARTICLE, useForm } from "../../hooks/use-form";
+import { Show, createEffect, createSignal, mergeProps, on } from "solid-js";
+import { postArticle, putArticle } from "../../api/api";
+import { FormArticle, STATUS_ARTICLE, useForm } from "../../hooks/use-form";
+import { useNavigate } from "@solidjs/router";
 
-export default function AddForm() {
-  const currentYear = new Date().getFullYear();
+const currentYear = new Date().getFullYear();
+
+const initialForm: FormArticle = {
+  title: "",
+  year: String(currentYear),
+  conference: "",
+  status: STATUS_ARTICLE.PUBLISHED,
+  link: "",
+};
+
+type Props = {
+  formData?: FormArticle;
+  isEdit?: boolean;
+  id?: string;
+};
+
+const successEditText = "Запись обновлена!";
+const successAddText = "Запись успешно добавлена!";
+
+export default function ArticleForm(_props: Props) {
+  const props = mergeProps(
+    { formData: initialForm, isEdit: false, id: "" },
+    _props
+  );
+
+  const navigate = useNavigate();
 
   const [error, setError] = createSignal("");
   const [message, setMessage] = createSignal("");
 
-  const { form, updateFormField, clearAllField } = useForm({
-    title: "",
-    year: String(currentYear),
-    conference: "",
-    status: STATUS_ARTICLE.PUBLISHED,
-    link: "",
-  });
+  const { form, updateFormField, clearAllField } = useForm(props.formData);
 
-  createEffect(on(message, () => setTimeout(() => setMessage(""), 10000)));
+  createEffect(
+    on(message, () =>
+      setTimeout(() => {
+        setMessage("");
+        navigate(-1);
+      }, 10000)
+    )
+  );
 
   const handleSubmit = async (event: Event) => {
     event.preventDefault();
-    const res = await postArticle(form);
+    const res = props.isEdit
+      ? await putArticle(props.id, form)
+      : await postArticle(form);
 
     if (res.status === 200) {
       setError("");
       clearAllField();
-      setMessage("Запись успешно добавлена");
+      setMessage(props.isEdit ? successEditText : successAddText);
     } else {
       setError(`Error:${res.status} ${res.statusText}`);
       setMessage("");
@@ -59,9 +87,9 @@ export default function AddForm() {
             value={form.title}
             required
           />
-          <div id="emailHelp" class="form-text">
+          {/* <div id="emailHelp" class="form-text">
             Мы никогда никому не передадим вашу электронную почту.
-          </div>
+          </div> */}
         </div>
         <div class="mb-3">
           <label for="conference-article-input" class="form-label">

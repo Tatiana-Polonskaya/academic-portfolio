@@ -1,24 +1,16 @@
-import { A } from "@solidjs/router";
-import AddForm from "../../components/add-form/add-form";
+import ArticleForm from "../../components/article-form/article-form";
 import Caption from "../../components/caption/caption";
-import { Routers } from "../../consts";
 import BaseLayout from "../../layouts/base/base-layout";
+import ButtonBack from "../../components/button-back/button-back";
 
 export default function AddArticle() {
   return (
     <BaseLayout>
       <div class="container-lg text-center">
-        <div class="d-flex mt-2 justify-content-md-start ">
-          <A
-            href={Routers.Articles}
-            class="link-secondary link-offset-2  link-underline-secondary link-underline-opacity-100-hover"
-          >
-            <i class="bi bi-arrow-left" /> К списку статей
-          </A>
-        </div>
+        <ButtonBack />
         <Caption mainText={"Создание новой записи"} />
 
-        <AddForm />
+        <ArticleForm />
       </div>
     </BaseLayout>
   );

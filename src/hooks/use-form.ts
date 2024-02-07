@@ -10,7 +10,7 @@ export type FormArticle = Omit<Article, "index">;
 export type FormAchievement = Omit<Achievement, "index">;
 
 function useForm(initial: FormArticle) {
-  const [form, setForm] = createStore<FormArticle>(initial);
+  const [form, setForm] = createStore<FormArticle | Article>(initial);
 
   const clearField = (fieldName: string, clearValue: string | number) => {
     setForm({
@@ -25,7 +25,7 @@ function useForm(initial: FormArticle) {
       conference: "",
       status: STATUS_ARTICLE.PUBLISHED,
       link: "",
-    });
+    }); // мб пофиксить
   };
 
   const updateFormField =
