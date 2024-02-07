@@ -10,7 +10,6 @@ import { TypeBiblio, createBiblioRecord } from "../../../@helpers/bibliographic-
 
 //TODO: добавить обработку ошибок при удалении
 //TODO: добавить модальное окно перед удалением
-//TODO: добавить библиографическую запись
 
 export default function SingleArticlePage() {
     const navigate = useNavigate();
