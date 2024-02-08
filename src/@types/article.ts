@@ -1,9 +1,13 @@
 export type Article = {
     index: string;
-    authors?: string;
+    indexation: number;
     title: string;
     year: string;
     conference: string;
     status: number;
-    link: string;
+    linkArticle: string;
+    linkCollection: string;
+    authors: string;
 };
+
+export type FormArticle = Omit<Article, "index">;

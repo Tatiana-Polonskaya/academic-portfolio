@@ -1,6 +1,6 @@
 import { A, useNavigate, useParams } from "@solidjs/router";
 import { Suspense, createResource } from "solid-js";
-import { deleteArticleById, fetchArticleById } from "../../../api/api";
+import { deleteArticleById, fetchArticleById } from "../../../@api/api";
 import BaseLayout from "../../../layouts/base/base-layout";
 import Spinner from "../../../components/spinner/spinner";
 import Caption from "../../../components/caption/caption";

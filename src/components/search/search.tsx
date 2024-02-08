@@ -1,7 +1,21 @@
-import { createSignal } from "solid-js";
+import { createSignal, mergeProps } from "solid-js";
 
-export default function Search() {
+type Props = {
+    onClick: (value: string) => void;
+};
+
+export default function Search(_props: Props) {
+
+    
+    const props = mergeProps({ onClick: () => console.log("click") }, _props);
+
     const [value, setValue] = createSignal("");
+
+    const handleButtonClick = (e: Event) => {
+        e.preventDefault();
+
+        props.onClick(value());
+    };
 
     return (
         <form class="d-flex flex-fill" role="search">
@@ -13,7 +27,7 @@ export default function Search() {
                 value={value()}
                 onChange={(e) => setValue(e.target.value)}
             />
-            <button class="btn btn-outline-success" type="submit">
+            <button class="btn btn-outline-success" type="submit" onClick={handleButtonClick}>
                 Поиск
             </button>
         </form>
