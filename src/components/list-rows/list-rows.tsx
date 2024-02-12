@@ -12,7 +12,7 @@ export default function ListRows(props: Props) {
     const titles = ["№", "Название", "Конференция", "Авторы", "Год"];
 
     return (
-        <table class="table table-hover align-middle">
+        <table class="table table-hover align-middle mt-3">
             <thead>
                 <tr>
                     <For each={titles}>{(title) => <th scope="col">{title}</th>}</For>

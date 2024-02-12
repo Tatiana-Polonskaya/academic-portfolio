@@ -1,8 +1,10 @@
 /* eslint-disable no-unused-vars */
 export enum Routers {
     Main = "/",
-    Cards = "/cards",
-    Achievement = "/achievement/:id",
+    Achievements = "/achievements",
+    Achievement = "/achievements/:id",
+    AddAchievement = "/achievements/add",
+    EditAchievement = "/achievements/:id/edit",
     Articles = "/articles",
     AddArticle = "/articles/add",
     EditArticle = "/articles/:id/edit",

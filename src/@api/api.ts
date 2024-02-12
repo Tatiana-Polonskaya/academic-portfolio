@@ -29,6 +29,12 @@ export async function fetchAchievements(): Promise<Achievement[]> {
     return fetch(`${URL}/achievements`, { headers: headers }).then((response) => response.json());
 }
 
+export async function fetchAchievementById(id: string): Promise<Achievement> {
+    return fetch(`${URL}/achievements/${id}`, { headers: headers }).then((response) =>
+        response.json(),
+    );
+}
+
 export async function postArticle(data: FormArticle): Promise<Response> {
     return fetch(`${URL}/articles/`, {
         method: "POST",

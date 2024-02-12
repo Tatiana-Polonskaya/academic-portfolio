@@ -16,6 +16,7 @@ import Caption from "../../components/caption/caption";
 import Spinner from "../../components/spinner/spinner";
 import { Article } from "../../@types/article";
 import { ARTICLE_STATUS } from "../../@hooks/use-form";
+import { Routers } from "../../consts";
 
 //TODO: исправить название по годам, взятых из статей
 
@@ -84,13 +85,14 @@ export default function ArticlesPage() {
 
     return (
         <BaseLayout>
-            <div class="container-lg px-9 text-center">
+            <div class="container-lg px-9 text-center ">
                 <Caption mainText={"Статьи"} extraText={"за 2020-2024 гг"} />
 
                 <ControlPanel
                     sortedOptions={sortedOptions}
                     onSearchClick={handleSearchClick}
                     onFilterClick={handleFilterClick}
+                    addLink={Routers.AddArticle}
                 />
 
                 <Suspense fallback={<Spinner />}>
