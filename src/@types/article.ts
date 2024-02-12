@@ -8,6 +8,7 @@ export type Article = {
     linkArticle: string;
     linkCollection: string;
     authors: string;
+    pages: string;
 };
 
 export type FormArticle = Omit<Article, "index">;

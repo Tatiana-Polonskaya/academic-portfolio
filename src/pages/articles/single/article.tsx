@@ -1,5 +1,5 @@
 import { A, useNavigate, useParams } from "@solidjs/router";
-import { Suspense, createResource } from "solid-js";
+import { Show, Suspense, createEffect, createResource, createSignal, on } from "solid-js";
 import { deleteArticleById, fetchArticleById } from "../../../@api/api";
 import BaseLayout from "../../../layouts/base/base-layout";
 import Spinner from "../../../components/spinner/spinner";
@@ -7,6 +7,7 @@ import Caption from "../../../components/caption/caption";
 import ButtonBack from "../../../components/button-back/button-back";
 import { Routers } from "../../../consts";
 import { TypeBiblio, createBiblioRecord } from "../../../@helpers/bibliographic-record";
+import { convertStatusArticle } from "../../../@helpers/covert-enums";
 
 //TODO: добавить обработку ошибок при удалении
 //TODO: добавить модальное окно перед удалением
@@ -14,6 +15,7 @@ import { TypeBiblio, createBiblioRecord } from "../../../@helpers/bibliographic-
 export default function SingleArticlePage() {
     const navigate = useNavigate();
     const params = useParams();
+
     const [data] = createResource(params.id, fetchArticleById);
 
     const handleDeleteClick = async () => {
@@ -56,30 +58,52 @@ export default function SingleArticlePage() {
                     </div>
 
                     <table class="table">
-                        <tbody>
-                            <tr>
-                                <th scope="row" style={{ width: "30%" }}>
-                                    Название
-                                </th>
-                                <td>{data() && data().title}</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Конференция</th>
-                                <td>{data() && data().conference}</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Год публикации</th>
-                                <td>{data() && data().year}</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Статус</th>
-                                <td>{data() && data().status}</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Ссылка на открытый источник</th>
-                                <td>{data() && <A href={data().link}>Источник</A>}</td>
-                            </tr>
-                        </tbody>
+                        <Show when={data()} fallback={<Spinner />}>
+                            <tbody>
+                                <tr>
+                                    <th scope="row" style={{ width: "30%" }}>
+                                        Название
+                                    </th>
+                                    <td>{data().title}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Авторы</th>
+                                    <td>{data().authors}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Конференция</th>
+                                    <td>{data().conference}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Индекс</th>
+                                    <td>{data().indexation}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Год публикации</th>
+                                    <td>{data().year}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Ссылка на открытый источник</th>
+                                    <td>
+                                        {data().linkArticle && (
+                                            <A href={data().linkArticle}>Источник</A>
+                                        )}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Ссылка на сборник</th>
+                                    <td>
+                                        {data().linkCollection && (
+                                            <A href={data().linkCollection}>Сборник</A>
+                                        )}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Статус</th>
+                                    <td>{convertStatusArticle(data().status)}</td>
+                                </tr>
+                            </tbody>
+                        </Show>
                     </table>
                     <div class="container-fluid p-2">
                         {data() && createBiblioRecord(TypeBiblio.ArticleFromCollection, data())}

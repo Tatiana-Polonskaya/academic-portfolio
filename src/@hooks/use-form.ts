@@ -1,7 +1,7 @@
 import { createStore } from "solid-js/store";
 import { Article, FormArticle } from "../@types/article";
 
-export enum STATUS_ARTICLE {
+export enum ARTICLE_STATUS {
     PUBLISHED = 1,
     NOT_PUBLISHED = 0,
 }
@@ -22,17 +22,18 @@ function useForm(initial: FormArticle) {
             title: "",
             year: "2022",
             conference: "",
-            status: STATUS_ARTICLE.PUBLISHED,
+            status: ARTICLE_STATUS.PUBLISHED,
             linkArticle: "",
             linkCollection: "",
             authors: "",
             indexation: 0,
+            pages: "",
         }); //  пофиксить
     };
 
     const updateFormField = (fieldName: string, value?: string | number) => (event: Event) => {
         const inputElement = event.currentTarget as HTMLInputElement;
-        console.log("value", value);
+        // console.log("value", value);
         setForm({
             [fieldName]: value !== undefined ? value : inputElement.value,
         });

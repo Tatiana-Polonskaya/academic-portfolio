@@ -14,44 +14,46 @@ import { fetchArticles } from "../../@api/api";
 import ControlPanel from "../../components/control-panel/control-panel";
 import Caption from "../../components/caption/caption";
 import Spinner from "../../components/spinner/spinner";
-import { useControlPanel } from "../../@hooks/use-control";
 import { Article } from "../../@types/article";
-import { STATUS_ARTICLE } from "../../@hooks/use-form";
+import { ARTICLE_STATUS } from "../../@hooks/use-form";
 
 //TODO: исправить название по годам, взятых из статей
 
 export default function ArticlesPage() {
-    const [data] = createResource(true, fetchArticles);
+    const [articles, setArticles] = createSignal<Article[]>([]);
+    const [filterData, setFilterData] = createSignal<Article[]>([]);
+
+    onMount(async () => {
+        const temp = await fetchArticles();
+        if (temp) {
+            setArticles(temp);
+            setFilterData(temp);
+        }
+    });
 
     const [isFilter, setIsFilter] = createSignal(false);
     const [isSorted, setIsSorted] = createSignal(false);
     const [searchValue, setSeachValue] = createSignal("");
 
-    const filterData = createMemo(() => {
-        if (!data()) return;
-        let res = () => data();
-        console.log("filterData", data(), isSorted(), isFilter(), searchValue());
-        if (searchValue().length > 0) {
-            console.log("searchValue");
-            res = () =>
-                res().filter(
+    createEffect(
+        on([isFilter, isSorted, searchValue], () => {
+            let temp = articles();
+            if (isFilter()) {
+                temp = temp.filter((item) => item.status === ARTICLE_STATUS.PUBLISHED);
+            }
+            if (isSorted()) {
+                temp = temp.sort((a: Article, b: Article) => Number(a.year) - Number(b.year));
+            }
+            if (searchValue()) {
+                temp = temp.filter(
                     (item) =>
                         item.title.includes(searchValue()) ||
-                        item.authors.includes(searchValue()) ||
                         item.conference.includes(searchValue()),
                 );
-        }
-        if (isFilter()) {
-            console.log("isFilter");
-            res = () => res().filter((item: Article) => item.status === STATUS_ARTICLE.PUBLISHED);
-        }
-        if (isSorted()) {
-            console.log("isSorted");
-            res = () => res().sort((a: Article, b: Article) => Number(a.year) - Number(b.year));
-        }
-        console.log(res());
-        return res();
-    });
+            }
+            setFilterData(temp);
+        }),
+    );
 
     const handleSearchClick = (value: string) => {
         console.log("value", value);

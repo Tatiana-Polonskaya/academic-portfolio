@@ -5,6 +5,14 @@ import { Indexation } from "../@types/indexation";
 const URL = "http://127.0.0.1:8000";
 const headers = { "Content-Type": "application/json; charset=utf-8" };
 
+function updateForService(data: Article | FormArticle) {
+    return { ...data, link_article: data.linkArticle, link_collection: data.linkCollection };
+}
+
+function updateForWeb(data) {
+    return { ...data, linkArticle: data.link_article, linkCollection: data.link_collection };
+}
+
 export async function fetchArticles(): Promise<Article[]> {
     return fetch(`${URL}/articles`, { headers: headers }).then((response) => {
         return response.json();
@@ -12,7 +20,9 @@ export async function fetchArticles(): Promise<Article[]> {
 }
 
 export async function fetchArticleById(id: string): Promise<Article> {
-    return fetch(`${URL}/articles/${id}`, { headers: headers }).then((response) => response.json());
+    return fetch(`${URL}/articles/${id}`, { headers: headers })
+        .then((response) => response.json())
+        .then((data) => updateForWeb(data));
 }
 
 export async function fetchAchievements(): Promise<Achievement[]> {
@@ -22,7 +32,7 @@ export async function fetchAchievements(): Promise<Achievement[]> {
 export async function postArticle(data: FormArticle): Promise<Response> {
     return fetch(`${URL}/articles/`, {
         method: "POST",
-        body: JSON.stringify(data),
+        body: JSON.stringify(updateForService(data)),
         headers: headers,
     });
 }
@@ -30,7 +40,7 @@ export async function postArticle(data: FormArticle): Promise<Response> {
 export async function putArticle(id: string, data: FormArticle): Promise<Response> {
     return fetch(`${URL}/articles/${id}`, {
         method: "PUT",
-        body: JSON.stringify(data),
+        body: JSON.stringify(updateForService(data)),
         headers: headers,
     });
 }

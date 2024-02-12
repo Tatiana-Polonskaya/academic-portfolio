@@ -1,20 +1,22 @@
-import { Show, createEffect, createSignal, mergeProps, on } from "solid-js";
-import { postArticle, putArticle } from "../../@api/api";
-import { STATUS_ARTICLE, useForm } from "../../@hooks/use-form";
+import { For, Show, createEffect, createSignal, mergeProps, on, onMount } from "solid-js";
+import { getIndexation, postArticle, putArticle } from "../../@api/api";
+import { ARTICLE_STATUS, useForm } from "../../@hooks/use-form";
 import { useNavigate } from "@solidjs/router";
 import { FormArticle } from "../../@types/article";
+import { Indexation } from "../../@types/indexation";
 
 const currentYear = new Date().getFullYear();
 
-// FIX: обновить первоначальную форму
-
 const initialForm: FormArticle = {
     title: "",
-    year: String(currentYear),
+    year: "2023",
     conference: "",
-    status: STATUS_ARTICLE.PUBLISHED,
-    link: "",
+    status: ARTICLE_STATUS.PUBLISHED,
+    linkArticle: "",
+    linkCollection: "",
     authors: "",
+    indexation: 0,
+    pages: "",
 };
 
 type Props = {
@@ -27,6 +29,13 @@ const successEditText = "Запись обновлена!";
 const successAddText = "Запись успешно добавлена!";
 
 export default function ArticleForm(_props: Props) {
+    const [indexations, setIndexations] = createSignal<Indexation[]>([]);
+
+    onMount(async () => {
+        const temp = await getIndexation();
+        if (temp) setIndexations(temp);
+    });
+
     const props = mergeProps({ formData: initialForm, isEdit: false, id: "" }, _props);
 
     const navigate = useNavigate();
@@ -48,6 +57,7 @@ export default function ArticleForm(_props: Props) {
 
     const handleSubmit = async (event: Event) => {
         event.preventDefault();
+
         const res = props.isEdit ? await putArticle(props.id, form) : await postArticle(form);
 
         if (res.status === 200) {
@@ -126,8 +136,21 @@ export default function ArticleForm(_props: Props) {
                         class="form-control"
                         id="link-article-input"
                         placeholder="https://...."
-                        onChange={updateFormField("link")}
-                        value={form.link}
+                        onChange={updateFormField("linkArticle")}
+                        value={form.linkArticle}
+                    />
+                </div>
+                <div class="mb-3">
+                    <label for="link-article-input" class="form-label">
+                        Ссылка на сборник
+                    </label>
+                    <input
+                        type="url"
+                        class="form-control"
+                        id="link-article-input"
+                        placeholder="https://...."
+                        onChange={updateFormField("linkCollection")}
+                        value={form.linkCollection}
                     />
                 </div>
 
@@ -148,16 +171,50 @@ export default function ArticleForm(_props: Props) {
                     </div>
                 </div>
 
+                <div class="mb-3">
+                    <label for="authors-article-input" class="form-label">
+                        Номера страниц через дефис
+                    </label>
+                    <input
+                        type="text"
+                        class="form-control"
+                        id="authors-article-input"
+                        placeholder="33-42"
+                        onChange={updateFormField("pages")}
+                        value={form.pages}
+                    />
+                </div>
+                <div>
+                    <p class="form-label">Индексирование</p>
+                    <For each={indexations()}>
+                        {(item) => (
+                            <div class="form-check">
+                                <input
+                                    class="form-check-input"
+                                    type="radio"
+                                    name="flexRadioDefault"
+                                    id="check-indexation-input"
+                                    onChange={updateFormField("indexation", item.id)}
+                                    checked={form.indexation === item.id}
+                                />
+                                <label class="form-check-label" for="check-indexation-input">
+                                    {item.title}
+                                </label>
+                            </div>
+                        )}
+                    </For>
+                </div>
+
                 <div>
                     <p class="form-label">Статус публикации</p>
-                    <div class="form-check">
+                    <div class="form-check-3">
                         <input
                             class="form-check-input "
                             type="radio"
                             name="flexRadioDefault"
                             id="check-publish-input"
-                            onChange={updateFormField("status", STATUS_ARTICLE.PUBLISHED)}
-                            checked={form.status === STATUS_ARTICLE.PUBLISHED}
+                            onChange={updateFormField("status", ARTICLE_STATUS.PUBLISHED)}
+                            checked={form.status === ARTICLE_STATUS.PUBLISHED}
                         />
                         <label class="form-check-label" for="check-publish-input">
                             Опубликована
@@ -169,8 +226,8 @@ export default function ArticleForm(_props: Props) {
                             type="radio"
                             name="flexRadioDefault"
                             id="check-add-publish-input"
-                            onChange={updateFormField("status", STATUS_ARTICLE.NOT_PUBLISHED)}
-                            checked={form.status === STATUS_ARTICLE.NOT_PUBLISHED}
+                            onChange={updateFormField("status", ARTICLE_STATUS.NOT_PUBLISHED)}
+                            checked={form.status === ARTICLE_STATUS.NOT_PUBLISHED}
                         />
                         <label class="form-check-label" for="check-add-publish-input">
                             Принята к публикации
