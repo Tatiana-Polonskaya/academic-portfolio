@@ -1,0 +1,10 @@
+@import './../../@style/components';
+@import './../../@style/colors';
+
+
+.my-caption {
+    @extend %text-montsserat-alternates;
+    color: $dark-violet;
+    word-wrap: break-word;
+    text-align: start;
+}

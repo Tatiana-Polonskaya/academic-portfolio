@@ -1,0 +1,37 @@
+@import "./../../@style/colors";
+@import "./../../@style/components";
+
+.line-separator {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    align-content: center;
+    gap: 15px;
+    padding: 30px 0;
+
+    .img {
+        &-right {
+            transform: rotate(180deg);
+            flex-grow: 0;
+            width: 8%;
+            min-width: 100px;
+            height: 20px;
+            display: flex;
+            align-content: center;
+        }
+
+        &-left {
+            height: 20px;
+            width: 100%;
+            display: flex;
+            align-content: center;
+        }
+    }
+
+    .title {
+        @extend %text-montsserat-alternates;
+        color: $main-purple;
+        font-size: 16px;
+        font-weight: 500;
+    }
+}

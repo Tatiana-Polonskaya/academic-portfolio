@@ -1,0 +1,37 @@
+@import "./../../@style/colors";
+@import "./../../@style/components";
+
+%text-footer {
+    @extend %text-montsserat;
+    font-weight: 700;
+    font-size: 24px;
+    color: $transparent-light-violet;
+}
+
+.my-footer {
+    width: 100%;
+    padding: 30px calc($side-padding + 10px);
+    background: $most-transparent-purple;
+
+    table {
+        width: 100%;
+        border-spacing: 20px;
+        border-collapse: separate;
+        text-align: justify;
+    }
+
+    td {
+        @extend %text-footer;
+    }
+
+    .link {
+        text-decoration: none;
+        color: $transparent-light-violet;
+        cursor: pointer;
+
+        &:hover {
+            color: $dark-violet;
+            transition-duration: .3s;
+        }
+    }
+}

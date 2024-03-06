@@ -1,0 +1,31 @@
+@import "./colors";
+
+$side-padding: 50px;
+
+%text-onest {
+    font-family: "Onest";
+}
+
+%text-montsserat-alternates {
+    font-family: "Montserrat Alternates", sans-serif;
+}
+
+%text-montsserat {
+    font-family: "Montserrat", sans-serif;
+}
+
+.cyan-background {
+    background: $cyan;
+}
+
+.red-background {
+    background: $red;
+}
+
+.yellow-background {
+    background: $yellow;
+}
+
+.purple-background {
+    background: $main-purple;
+}

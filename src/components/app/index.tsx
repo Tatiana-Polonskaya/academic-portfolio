@@ -1,7 +1,7 @@
 import { Router, Route } from "@solidjs/router";
 import { lazy } from "solid-js";
 import { Routers } from "../../consts";
-import SingleArticlePage from "../../pages/articles/single/article";
+import SingleArticlePage from "../../pages/article/article";
 import ArticlesPage from "../../pages/articles/articles";
 
 import AddArticle from "../../pages/add-article/add-article";

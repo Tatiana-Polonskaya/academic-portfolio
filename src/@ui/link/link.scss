@@ -1,0 +1,24 @@
+@import "./../../@style/colors";
+@import "./../../@style/components";
+
+.my-link {
+
+    color: $transparent-purple;
+    display: flex;
+    flex-flow: row nowrap;
+    gap: 10px;
+    align-items: center;
+    cursor: pointer;
+
+    .title {
+        @extend %text-montsserat;
+
+        font-size: 18px;
+        font-weight: 600;
+    }
+
+    &:hover {
+        color: $main-purple;
+        transition-duration: .3s;
+    }
+}

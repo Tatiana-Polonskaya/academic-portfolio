@@ -1,0 +1,9 @@
+@import "./../../@style/components";
+
+.my-base-layout {
+    .content {
+        padding: 0 $side-padding;
+        padding-bottom: $side-padding;
+    }
+
+}

@@ -1,0 +1,28 @@
+@import "./../../@style/colors";
+@import "./../../@style/components";
+
+
+.info-buble {
+
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-content: center;
+    padding: 10px 80px;
+
+    &-main {
+        @extend %text-montsserat-alternates;
+        color: $dark-violet;
+        font-size: 38px;
+        font-weight: 700;
+        text-align: center;
+    }
+
+    &-description {
+        @extend %text-montsserat-alternates;
+        color: $dark-violet;
+        font-size: 18px;
+        font-weight: 700;
+        text-align: center;
+    }
+}

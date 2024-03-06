@@ -1,0 +1,75 @@
+@import "./../../@style/colors";
+@import "./../../@style/components";
+
+.contact-block {
+
+    width: 100%;
+    padding: 30px 10%;
+
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+
+    gap: 20px;
+
+    background: $dark-violet;
+    color: $white;
+
+    .row-grow {
+
+        display: flex;
+        flex-flow: row wrap;
+        gap: 50px;
+        justify-content: space-evenly;
+        align-items: center;
+    }
+
+    .title {
+        flex-grow: 1;
+        @extend %text-montsserat;
+        font-size: 24px;
+        font-weight: 600;
+    }
+
+    .btn {
+        padding: 0 20px;
+
+        @extend %text-montsserat;
+        border-radius: 15px;
+        background: $white ;
+        color: $dark-violet;
+        font-size: 18px;
+        font-weight: 600;
+        display: flex;
+        flex-flow: row nowrap;
+        gap: 8px;
+
+        box-shadow: 1px 4px 4px rgb(0, 0, 0, 0.25);
+    }
+
+    .form {
+        flex-grow: 1;
+        display: flex;
+        flex-flow: row nowrap;
+        gap: 20px;
+
+
+        .input {
+
+            border-radius: 15px;
+            background: $white;
+            padding: 0 30px;
+
+            box-shadow: 1px 4px 4px rgb(0, 0, 0, 0.25);
+
+            @extend %text-montsserat;
+            color: $dark-violet;
+
+            &::placeholder {
+                @extend %text-montsserat;
+                color: $transparent-dark-violet;
+                font-style: italic;
+            }
+        }
+    }
+}

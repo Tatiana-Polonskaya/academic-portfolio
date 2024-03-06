@@ -1,13 +1,13 @@
 import { A, useNavigate, useParams } from "@solidjs/router";
 import { Show, Suspense, createEffect, createResource, createSignal, on } from "solid-js";
-import { deleteArticleById, fetchArticleById } from "../../../@api/api";
-import BaseLayout from "../../../layouts/base/base-layout";
-import Spinner from "../../../components/spinner/spinner";
-import Caption from "../../../components/caption/caption";
-import ButtonBack from "../../../components/button-back/button-back";
-import { Routers } from "../../../consts";
-import { TypeBiblio, createBiblioRecord } from "../../../@helpers/bibliographic-record";
-import { convertStatusArticle } from "../../../@helpers/covert-enums";
+import { deleteArticleById, fetchArticleById } from "../../@api/api";
+import BaseLayout from "../../layouts/base/base-layout";
+import Spinner from "../../components/spinner/spinner";
+import Caption from "../../components/caption/caption";
+import ButtonBack from "../../components/button-back/button-back";
+import { Routers } from "../../consts";
+import { TypeBiblio, createBiblioRecord } from "../../@helpers/bibliographic-record";
+import { convertStatusArticle } from "../../@helpers/covert-enums";
 
 //TODO: добавить обработку ошибок при удалении
 //TODO: добавить модальное окно перед удалением

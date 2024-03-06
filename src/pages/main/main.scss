@@ -1,0 +1,11 @@
+.article-block {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    align-items: stretch;
+    gap: 15px;
+
+    .grow {
+        flex-grow: 1;
+    }
+}
