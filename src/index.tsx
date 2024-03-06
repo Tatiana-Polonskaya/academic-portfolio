@@ -1,6 +1,7 @@
 import { render } from "solid-js/web";
 import App from "./components/app";
 import "./@style/reset.css";
+import "./@style/scroll.scss";
 import "./@fonts";
 
 const root = document.getElementById("root");

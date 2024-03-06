@@ -1,9 +1,24 @@
+@import "./../../@style/colors";
+
 .articles-component {
 
     .row {
         display: flex;
-        flex-flow: row wrap;
+        flex-flow: row nowrap;
+
+        &-wrap {
+            display: flex;
+            flex-flow: row wrap;
+
+        }
+    }
+
+    .gap {
         gap: 40px;
+    }
+
+    .little-gap {
+        gap: 20px;
     }
 
     .col {
@@ -22,5 +37,28 @@
     .link-buble {
         padding: 20px;
         justify-content: center;
+    }
+
+    .grow-btn {
+        border-radius: 10px;
+        padding: 10px 40px;
+
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: center;
+        align-items: center;
+        gap: 5px;
+
+        background-color: $transparent-purple;
+
+        &:hover {
+            background-color: $main-purple;
+            transition-duration: .5s;
+
+        }
+    }
+
+    .padding {
+        padding: 0 0 40px;
     }
 }

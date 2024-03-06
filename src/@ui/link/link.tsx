@@ -12,7 +12,7 @@ export default function Link(props: Props) {
     return (
         <A class="my-link" href={props.href}>
             <Show when={props.direction === "left"}>
-                <i class="bi bi-arrow-right" />
+                <i class="bi bi-arrow-left" />
             </Show>
             <span class="title">{props.title}</span>
 

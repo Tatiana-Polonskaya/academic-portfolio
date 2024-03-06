@@ -8,6 +8,18 @@ import ButtonBack from "../../components/button-back/button-back";
 import { Routers } from "../../consts";
 import { TypeBiblio, createBiblioRecord } from "../../@helpers/bibliographic-record";
 import { convertStatusArticle } from "../../@helpers/covert-enums";
+import Link from "../../@ui/link/link";
+import BubbleBlock from "../../@ui/buble-block/buble-block";
+
+import "./article.scss";
+import LineSeparator from "../../components/line-separator/line-separator";
+import Row from "../../components/row/row";
+import ListRows from "../../components/list-rows/list-rows";
+import Button, { ButtonType } from "../../@ui/button/button";
+import {
+    buttonTypeByArticleStatus,
+    buttonTypeByIndexation,
+} from "../../@helpers/color-by-parametres";
 
 //TODO: добавить обработку ошибок при удалении
 //TODO: добавить модальное окно перед удалением
@@ -30,85 +42,75 @@ export default function SingleArticlePage() {
 
     return (
         <BaseLayout>
-            <div class="d-flex flex-column mb-3 ps-4 pe-4 ms-2 me-2">
-                <ButtonBack />
-                <Suspense fallback={<Spinner />}>
-                    <div class="d-flex flex-row justify-content-between align-items-center">
-                        {data() && <Caption mainText={data().title} />}
-                        <div class="d-flex flex-row align-items-center gap-3">
-                            <button
-                                type="button"
-                                class="btn btn-outline-primary align-self-center"
-                                onClick={() =>
-                                    navigate(Routers.EditArticle.replace(":id", params.id), {
-                                        state: { id: params.id, article: data() },
-                                    })
-                                }
-                            >
-                                <i class="bi bi-pencil-fill" />
-                            </button>
-                            <button
-                                type="button"
-                                class="btn btn-outline-danger align-self-center"
-                                onClick={handleDeleteClick}
-                            >
-                                <i class="bi bi-trash-fill" />
-                            </button>
-                        </div>
-                    </div>
+            <div class="single-article">
+                <Link direction="left" href={Routers.Articles} title="назад" />
+                <LineSeparator title="общая информация" />
 
-                    <table class="table">
-                        <Show when={data()} fallback={<Spinner />}>
-                            <tbody>
-                                <tr>
-                                    <th scope="row" style={{ width: "30%" }}>
-                                        Название
-                                    </th>
-                                    <td>{data().title}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Авторы</th>
-                                    <td>{data().authors}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Конференция</th>
-                                    <td>{data().conference}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Индекс</th>
-                                    <td>{data().indexation}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Год публикации</th>
-                                    <td>{data().year}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Ссылка на открытый источник</th>
-                                    <td>
-                                        {data().linkArticle && (
-                                            <A href={data().linkArticle}>Источник</A>
-                                        )}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Ссылка на сборник</th>
-                                    <td>
-                                        {data().linkCollection && (
-                                            <A href={data().linkCollection}>Сборник</A>
-                                        )}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Статус</th>
-                                    <td>{convertStatusArticle(data().status)}</td>
-                                </tr>
-                            </tbody>
-                        </Show>
-                    </table>
-                    <div class="container-fluid p-2">
-                        {data() && createBiblioRecord(TypeBiblio.ArticleFromCollection, data())}
-                    </div>
+                <Suspense fallback={<Spinner />}>
+                    <Show when={data()}>
+                        <BubbleBlock>
+                            <div class="bubble">
+                                <Caption
+                                    mainText={data().title}
+                                    fontSize="24px"
+                                    padding="0 0 20px"
+                                />
+                                <ListRows>
+                                    <Row
+                                        description={`Авторы: ${data().authors}`}
+                                        onClick={() => {}}
+                                    />
+                                    <Row
+                                        description={`Сборник: ${data().conference}`}
+                                        onClick={() => {}}
+                                    />
+                                    <Row
+                                        description={`Город публикации: ${data().index}`}
+                                        onClick={() => {}}
+                                    />
+                                    <Row
+                                        description={`Издательство: ${data().title}`}
+                                        onClick={() => {}}
+                                    />
+                                    <Row
+                                        description={`Год публикации: ${data().year}`}
+                                        onClick={() => {}}
+                                    />
+                                    <Row
+                                        description={`Страницы: ${data().pages}`}
+                                        onClick={() => {}}
+                                    />
+                                </ListRows>
+                                <div class="button-group">
+                                    <Button
+                                        type={buttonTypeByIndexation(data().indexation)}
+                                        onClick={() => {}}
+                                    >
+                                        {data().indexation}
+                                    </Button>
+                                    <Button
+                                        type={buttonTypeByArticleStatus(data().status)}
+                                        onClick={() => {}}
+                                    >
+                                        {convertStatusArticle(data().status)}
+                                    </Button>
+                                </div>
+                            </div>
+                        </BubbleBlock>
+                    </Show>
                 </Suspense>
+                <LineSeparator title="библиографическая запись" />
+                <BubbleBlock>
+                    <div class="bubble text copy-block" title={"скопировать"}>
+                        <Show when={data()} fallback={<Spinner />}>
+                            {createBiblioRecord(TypeBiblio.ArticleFromCollection, data())}
+                        </Show>
+                    </div>
+                </BubbleBlock>
+                <LineSeparator title="источник" />
+                <Show when={data()} fallback={<Spinner />}>
+                    <Row description={`сайт: ${data().linkArticle}`} id={1} onClick={() => {}} />
+                </Show>
             </div>
         </BaseLayout>
     );

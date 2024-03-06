@@ -6,11 +6,12 @@ export enum ButtonType {
     Red,
     Yellow,
     Cyan,
-    Green
+    Green,
 }
 
 type Props = {
-    type: ButtonType;
+    type?: ButtonType;
+    class?: string;
     onClick: () => void;
     children: JSX.Element | JSX.Element[];
 };
@@ -25,7 +26,7 @@ export default function Button(_props: Props) {
     );
     return (
         <button
-            class={"button"}
+            class={`button ${props.class || ""}`}
             onClick={() => props.onClick}
             classList={{
                 "button-purple": props.type === ButtonType.Default,

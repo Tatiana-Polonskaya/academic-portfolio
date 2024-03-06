@@ -1,18 +1,10 @@
-import { For } from "solid-js";
-import Row from "../row/row";
-import { Article } from "../../@types/article";
+import { JSX } from "solid-js";
 import "./list-rows.scss";
 
 type Props = {
-    articles: Article[];
+    children: JSX.Element | JSX.Element[];
 };
 
 export default function ListRows(props: Props) {
-    return (
-        <div class="list-rows-table">
-            <For each={props.articles}>
-                {(article, id) => <Row id={id() + 1} article={article} />}
-            </For>
-        </div>
-    );
+    return <div class="list-rows-table">{props.children}</div>;
 }

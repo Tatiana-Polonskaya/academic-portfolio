@@ -7,7 +7,7 @@ export default function Header() {
         <nav class="my-header">
             <div class="block-title">
                 <a class="brand">
-                    <i class="bi bi-github" />
+                    <i class="bi bi-mortarboard" />
                 </a>
                 <a class="brand">Мое портфолио</a>
             </div>

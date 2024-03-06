@@ -1,3 +1,4 @@
+import Input from "../../@ui/input/input";
 import "./contact-block.scss";
 
 export default function ContactBlock() {
@@ -14,7 +15,7 @@ export default function ContactBlock() {
                     телеграм
                 </button>
                 <div class="form">
-                    <input class="input"  placeholder="youremail@mail.com"/>
+                    <Input placeholder="youremail@mail.com" />
                     <i class="bi bi-arrow-right" />
                 </div>
             </div>

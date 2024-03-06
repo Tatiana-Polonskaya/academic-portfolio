@@ -1,0 +1,22 @@
+@import "./../../@style/colors";
+@import "./../../@style/components";
+
+.my-input {
+    border-radius: 10px;
+    background: $white;
+    padding: 5px 30px 5px 15px;
+
+    border: 1px solid #F0F0F0;
+    box-shadow: 0px 2px 10px rgb(0, 0, 0, 0.25);
+
+    @extend %text-montsserat;
+    color: $dark-violet;
+    font-size: 16px;
+
+    &::placeholder {
+        @extend %text-montsserat;
+        color: $transparent-dark-violet;
+        font-style: italic;
+        font-size: 16px;
+    }
+}

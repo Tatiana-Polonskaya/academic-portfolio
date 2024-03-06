@@ -1,0 +1,33 @@
+@import "./../../@style/colors";
+@import "./../../@style/components";
+
+.single-article {
+    padding-top: 30px;
+
+    .bubble {
+        padding: 20px;
+    }
+
+    .button-group {
+        padding: 20px 20px 0;
+        display: flex;
+        flex-flow: row nowrap;
+        gap: 10px;
+    }
+
+    .text {
+        @extend %text-montsserat-alternates;
+        font-size: 18px;
+        font-weight: 600;
+        color: $dark-violet;
+        text-align: justify;
+    }
+
+    .copy-block {
+        cursor: pointer;
+
+        &:hover {
+            background: linear-gradient(0.25turn, rgba(255, 255, 255, 15%), rgba(190, 124, 255, 15%), rgba(255, 255, 255, 15%));
+        }
+    }
+}

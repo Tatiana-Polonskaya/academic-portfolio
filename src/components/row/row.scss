@@ -21,7 +21,7 @@
         display: flex;
         flex-flow: column nowrap;
         justify-content: center;
-        gap:10px;
+        gap: 10px;
 
         .decription-part {
             flex-grow: 1;
@@ -45,8 +45,13 @@
         font-weight: 700;
     }
 
-    &:hover {
-        background: linear-gradient(0.25turn, rgba(255, 255, 255, 15%), rgba(190, 124, 255, 15%), rgba(255, 255, 255, 15%));
-        cursor: pointer;
+
+
+    &-hovering {
+
+        &:hover {
+            background: linear-gradient(0.25turn, rgba(255, 255, 255, 15%), rgba(190, 124, 255, 15%), rgba(255, 255, 255, 15%));
+            cursor: pointer;
+        }
     }
 }

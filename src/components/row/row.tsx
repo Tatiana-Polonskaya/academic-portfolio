@@ -1,46 +1,45 @@
-import { useNavigate } from "@solidjs/router";
-import { Routers } from "../../consts";
-import { Article } from "../../@types/article";
+import Button, { ButtonType } from "../../@ui/button/button";
+
+import { For, Show } from "solid-js";
 import "./row.scss";
-import Button from "../../@ui/button/button";
-import { buttonTypeByIndexation, buttonTypeByYear } from "../../@helpers/color-by-parametres";
+
+export type ButtonRow = {
+    title: string;
+    onClick: () => void;
+    type: ButtonType;
+};
 
 type Props = {
-    id: number;
-    article: Article;
+    id?: number;
+    description: string;
+    onClick: () => void;
+    hasButtons?: boolean;
+    buttons?: ButtonRow[];
+    isHover?: boolean;
 };
 
 export default function Row(props: Props) {
-    const navigate = useNavigate();
     return (
         <div
             class="my-row"
-            onClick={() => navigate(Routers.Article.replace(":id", `${props.article.index}`))}
+            classList={{ "my-row-hovering": props.isHover }}
+            onClick={() => props.onClick()}
         >
-            <div class="text index-part">{props.id}.</div>
+            <Show when={typeof props.id === "number"}>
+                <div class="text index-part">{props.id}.</div>
+            </Show>
             <div class="main-part">
-                <div class="text decription-part">
-                    {props.article.title} // {props.article.authors}
-                </div>
+                <div class="text decription-part">{props.description}</div>
                 <div class="button-part">
-                    <Button
-                        type={buttonTypeByYear(props.article.year)}
-                        onClick={() => console.log("click")}
-                    >
-                        <>{props.article.year}</>
-                    </Button>
-                    <Button
-                        type={buttonTypeByIndexation(props.article.indexation)}
-                        onClick={() => console.log("click")}
-                    >
-                        <>
-                            {props.article.indexation === 0
-                                ? "Другое"
-                                : props.article.indexation === 1
-                                  ? "РИНЦ"
-                                  : "ВАК"}
-                        </>
-                    </Button>
+                    <Show when={props.hasButtons}>
+                        <For each={props.buttons}>
+                            {(elem) => (
+                                <Button type={elem.type} onClick={elem.onClick}>
+                                    {elem.title}
+                                </Button>
+                            )}
+                        </For>
+                    </Show>
                 </div>
             </div>
         </div>
