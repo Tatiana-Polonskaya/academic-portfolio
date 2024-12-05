@@ -1,10 +1,9 @@
-import { For, Suspense, createEffect, createSignal, on, onMount } from "solid-js";
+import { For, Show, createEffect, createSignal, on, onMount } from "solid-js";
 import ListRows from "../../components/list-rows/list-rows";
 
 import BaseLayout from "../../layouts/base/base-layout";
 import { fetchArticles } from "../../@api/api";
 import Caption from "../../components/caption/caption";
-import Spinner from "../../components/spinner/spinner";
 import { Article } from "../../@types/article";
 
 import LineSeparator from "../../components/line-separator/line-separator";
@@ -15,13 +14,13 @@ import MyChart from "../../components/chart/chart";
 import Link from "../../@ui/link/link";
 import { ChartOptions } from "chart.js";
 import Input from "../../@ui/input/input";
-import Button, { ButtonType } from "../../@ui/button/button";
+import Button from "../../@ui/button/button";
 
 import "./articles.scss";
-import Row from "../../components/row/row";
 import { useNavigate } from "@solidjs/router";
-import { Routers } from "../../consts";
-import { buttonTypeByIndexation, buttonTypeByYear } from "../../@helpers/color-by-parametres";
+import { ArticleRow } from "../../components/article-row/article-row";
+import { changeSortType, getSortFunctionByType, SortedType } from "../../@types/sort";
+import { hasArticleText } from "./helpers";
 
 const data = {
     labels: ["Статьи", "Олимпиады", "Хакатоны"],
@@ -147,28 +146,74 @@ const optionsBar: ChartOptions = {
 };
 
 export default function ArticlesPage() {
-    const navigate = useNavigate();
     const [articles, setArticles] = createSignal<Article[]>([]);
     const [filterData, setFilterData] = createSignal<Article[]>([]);
 
-    onMount(async () => {
-        const temp = await fetchArticles();
-        if (temp) {
-            setArticles(temp);
-            setFilterData(temp);
-        }
+    onMount(() => {
+        fetchArticles().then((response) => {
+            if (response) {
+                setArticles(response);
+                setFilterData(response);
+            }
+        });
     });
+
+    //#region -------------------- INPUT --------------------
+    const [enteredValue, setEnteredValue] = createSignal("");
+
+    //#endregion
+
+    const [yearSort, setYearSort] = createSignal(SortedType.None);
+    const [textSort, setTextSort] = createSignal(SortedType.None);
+
+    const handleYearSortChange = () => {
+        setYearSort((prev) => changeSortType(prev));
+    };
+
+    const handleTextSortChange = () => {
+        setTextSort((prev) => changeSortType(prev));
+    };
+
+    createEffect(
+        on(
+            () => [enteredValue(), yearSort(), textSort()],
+            () => {
+                let filtered = [...articles()];
+                if (enteredValue()) {
+                    filtered = filtered.filter((acticle) =>
+                        hasArticleText(acticle, enteredValue()),
+                    );
+                }
+                if (yearSort() !== SortedType.None) {
+                    if (yearSort() === SortedType.Abs) {
+                        filtered.sort((a, b) => Number(a.year) - Number(b.year));
+                    } else {
+                        filtered.sort((a, b) => Number(b.year) - Number(a.year));
+                    }
+                }
+                if (textSort() !== SortedType.None) {
+                    filtered = filtered.sort(getSortFunctionByType(textSort()));
+                }
+
+                setFilterData(filtered);
+            },
+        ),
+    );
 
     return (
         <BaseLayout>
             <div class="articles-component">
-                <Caption mainText={"Публикации и статьи"} padding="30px 0 0 0" />
+                <Caption mainText={"Публикации и статьи"} />
 
                 <LineSeparator title="статистика" />
 
-                <div class="row-wrap gap">
-                    <div class="col flex-grow gap">
-                        <InfoBuble title="105" description="Всего" class="flex-grow" />
+                <div class="row-wrap">
+                    <div class="col flex-grow">
+                        <InfoBuble
+                            title={articles().length.toString()}
+                            description="Общее количество статей"
+                            class="flex-grow"
+                        />
 
                         <BubbleBlock class="flex-grow">
                             <div class="col link-buble">
@@ -234,56 +279,54 @@ export default function ArticlesPage() {
                 <LineSeparator title="список" />
 
                 <div class="row-wrap padding little-gap">
-                    <Button class="grow-btn" onClick={() => console.log("click")}>
+                    <Button class="grow-btn" onClick={handleYearSortChange}>
                         год
-                        <i class="bi bi-caret-down-fill" />
+                        <i
+                            classList={{
+                                "bi bi-caret-down-fill": yearSort() === SortedType.Desc,
+                                "bi bi-caret-up-fill": yearSort() === SortedType.Abs,
+                            }}
+                        />
                     </Button>
-                    <Button class="grow-btn" onClick={() => console.log("click")}>
+                    <Button class="grow-btn" onClick={handleTextSortChange}>
                         абв
-                        <i class="bi bi-caret-down-fill" />
+                        <i
+                            class="bi"
+                            classList={{
+                                "bi-caret-down-fill": textSort() === SortedType.Desc,
+                                "bi-caret-up-fill": textSort() === SortedType.Abs,
+                            }}
+                        />
                     </Button>
                     <div class="row flex-grow little-gap">
-                        <Input class="flex-grow " placeholder="название статьи..." />
-                        <Button class="grow-btn" onClick={() => console.log("click")}>
-                            поиск
+                        <Input
+                            class="flex-grow "
+                            placeholder="Введите название статьи..."
+                            value={enteredValue()}
+                            onChange={setEnteredValue}
+                        />
+                        <Button class="grow-btn" onClick={[setEnteredValue, ""]}>
+                            Очистить
                         </Button>
                     </div>
                 </div>
 
-                <Suspense fallback={<Spinner />}>
-                    <ListRows>
+                <ListRows>
+                    <Show
+                        when={filterData().length > 0}
+                        fallback={"Упс, почему-то ничего не нашлось..."}
+                    >
                         <For each={filterData()}>
                             {(article, id) => (
-                                <Row
+                                <ArticleRow
+                                    article={article}
                                     id={id() + 1}
-                                    description={`${article.title} // ${article.authors}`}
-                                    onClick={() =>
-                                        navigate(Routers.Article.replace(":id", `${article.index}`))
-                                    }
-                                    hasButtons
-                                    buttons={[
-                                        {
-                                            title: article.year,
-                                            onClick: () => console.log("click"),
-                                            type: buttonTypeByYear(article.year),
-                                        },
-                                        {
-                                            title:
-                                                article.indexation === 0
-                                                    ? "Другое"
-                                                    : article.indexation === 1
-                                                      ? "РИНЦ"
-                                                      : "ВАК",
-                                            onClick: () => console.log("click"),
-                                            type: buttonTypeByIndexation(article.indexation),
-                                        },
-                                    ]}
-                                    isHover
+                                    onLableClick={setEnteredValue}
                                 />
                             )}
                         </For>
-                    </ListRows>
-                </Suspense>
+                    </Show>
+                </ListRows>
             </div>
         </BaseLayout>
     );

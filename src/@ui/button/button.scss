@@ -3,7 +3,6 @@
 
 
 .button {
-
     border-radius: 10px;
     padding: 3px 25px;
     text-align: center;
@@ -14,6 +13,7 @@
     color: $white;
     font-size: 18px;
     font-weight: 500;
+    opacity: 0.6;
 
     &-purple {
         background: $main-purple;
@@ -33,5 +33,10 @@
 
     &-green {
         background: $green ;
+    }
+
+    &:hover {
+        opacity: 1;
+        transition-duration: .5s;
     }
 }

@@ -1,6 +1,6 @@
 import { Achievement, FormAchievement } from "../@types/achievement";
 import { Article, FormArticle } from "../@types/article";
-import { Indexation } from "../@types/indexation";
+import { TIndexation } from "../@types/indexation";
 
 const URL = "http://127.0.0.1:8000";
 const headers = { "Content-Type": "application/json; charset=utf-8" };
@@ -65,7 +65,7 @@ export async function postAchievement(data: FormAchievement): Promise<Achievemen
     }).then((response) => response.json());
 }
 
-export async function getIndexation(): Promise<Indexation[]> {
+export async function getIndexation(): Promise<TIndexation[]> {
     return fetch(`${URL}/indexations`, { headers: headers }).then((response) => {
         return response.json();
     });

@@ -4,11 +4,14 @@
 
 .info-buble {
 
+    height: 100%;
+    width: 100%;
     display: flex;
     flex-flow: column nowrap;
     justify-content: center;
     align-content: center;
-    padding: 10px 80px;
+    padding: 10px;
+    max-width: 250px;
 
     &-main {
         @extend %text-montsserat-alternates;
@@ -24,5 +27,7 @@
         font-size: 18px;
         font-weight: 700;
         text-align: center;
+        // white-space: pre;
+
     }
 }

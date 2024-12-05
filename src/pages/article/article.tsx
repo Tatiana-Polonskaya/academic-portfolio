@@ -15,7 +15,7 @@ import "./article.scss";
 import LineSeparator from "../../components/line-separator/line-separator";
 import Row from "../../components/row/row";
 import ListRows from "../../components/list-rows/list-rows";
-import Button, { ButtonType } from "../../@ui/button/button";
+import Button from "../../@ui/button/button";
 import {
     buttonTypeByArticleStatus,
     buttonTypeByIndexation,

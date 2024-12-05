@@ -1,7 +1,7 @@
-import Button, { ButtonType } from "../../@ui/button/button";
 
-import { For, Show } from "solid-js";
+import { For, ParentProps, Show } from "solid-js";
 import "./row.scss";
+import { ButtonType } from "../../@ui/button/type";
 
 export type ButtonRow = {
     title: string;
@@ -9,21 +9,19 @@ export type ButtonRow = {
     type: ButtonType;
 };
 
-type Props = {
+export type TRowProps = {
     id?: number;
     description: string;
-    onClick: () => void;
-    hasButtons?: boolean;
-    buttons?: ButtonRow[];
+    onDblClick: () => void;
     isHover?: boolean;
 };
 
-export default function Row(props: Props) {
+export default function Row(props: ParentProps<TRowProps>) {
     return (
         <div
             class="my-row"
             classList={{ "my-row-hovering": props.isHover }}
-            onClick={() => props.onClick()}
+            onDblClick={() => props.onDblClick()}
         >
             <Show when={typeof props.id === "number"}>
                 <div class="text index-part">{props.id}.</div>
@@ -31,15 +29,7 @@ export default function Row(props: Props) {
             <div class="main-part">
                 <div class="text decription-part">{props.description}</div>
                 <div class="button-part">
-                    <Show when={props.hasButtons}>
-                        <For each={props.buttons}>
-                            {(elem) => (
-                                <Button type={elem.type} onClick={elem.onClick}>
-                                    {elem.title}
-                                </Button>
-                            )}
-                        </For>
-                    </Show>
+                    <Show when={props.children}>{props.children}</Show>
                 </div>
             </div>
         </div>

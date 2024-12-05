@@ -1,6 +1,13 @@
 @import "./../../@style/colors";
+@import "./../../@style/components";
 
 .articles-component {
+
+    padding: 30px 0 0 0;
+    @extend %text-montsserat-alternates;
+    color: $transparent-dark-violet;
+    font-size: 18px;
+    font-weight: 700;
 
     .row {
         display: flex;
@@ -9,7 +16,6 @@
         &-wrap {
             display: flex;
             flex-flow: row wrap;
-
         }
     }
 
@@ -21,11 +27,16 @@
         gap: 20px;
     }
 
+    .mini-gap {
+        gap: 10px;
+    }
+
     .col {
         display: flex;
         flex-flow: column nowrap;
-        gap: 30px;
+        gap: 20px;
         align-items: center;
+        justify-content: center;
     }
 
     .flex-grow {
@@ -35,8 +46,8 @@
     }
 
     .link-buble {
-        padding: 20px;
-        justify-content: center;
+        padding: 10px;
+        height: 100%;
     }
 
     .grow-btn {
@@ -48,14 +59,6 @@
         justify-content: center;
         align-items: center;
         gap: 5px;
-
-        background-color: $transparent-purple;
-
-        &:hover {
-            background-color: $main-purple;
-            transition-duration: .5s;
-
-        }
     }
 
     .padding {

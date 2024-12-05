@@ -1,20 +1,12 @@
 import { JSX, mergeProps } from "solid-js";
+import { ButtonType } from "./type";
 import "./button.scss";
-
-export enum ButtonType {
-    Default,
-    Red,
-    Yellow,
-    Cyan,
-    Green,
-}
 
 type Props = {
     type?: ButtonType;
     class?: string;
-    onClick: () => void;
     children: JSX.Element | JSX.Element[];
-};
+} & JSX.ButtonHTMLAttributes<HTMLButtonElement>;
 
 export default function Button(_props: Props) {
     const props = mergeProps(
@@ -27,7 +19,7 @@ export default function Button(_props: Props) {
     return (
         <button
             class={`button ${props.class || ""}`}
-            onClick={() => props.onClick}
+            onClick={props.onClick}
             classList={{
                 "button-purple": props.type === ButtonType.Default,
                 "button-red": props.type === ButtonType.Red,

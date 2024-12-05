@@ -1,11 +1,15 @@
 import { A, useNavigate, useParams } from "@solidjs/router";
-import { createResource, Show } from "solid-js";
+import { createResource, Show, Suspense } from "solid-js";
 import { fetchAchievementById } from "../../@api/api";
 import BaseLayout from "../../layouts/base/base-layout";
-import ButtonBack from "../../components/button-back/button-back";
 import Spinner from "../../components/spinner/spinner";
 import Caption from "../../components/caption/caption";
 import { Routers } from "../../consts";
+import Link from "../../@ui/link/link";
+import LineSeparator from "../../components/line-separator/line-separator";
+import Row from "../../components/row/row";
+import BubbleBlock from "../../@ui/buble-block/buble-block";
+import ListRows from "../../components/list-rows/list-rows";
 
 export default function AchievementPage() {
     const navigate = useNavigate();
@@ -19,8 +23,59 @@ export default function AchievementPage() {
 
     return (
         <BaseLayout>
-            <div class="d-flex flex-column mb-3 ps-4 pe-4 ms-2 me-2">
-                <ButtonBack />
+            <div>
+                <Link direction="left" href={Routers.Articles} title="назад" />
+                <LineSeparator title="общая информация" />
+                <Suspense fallback={<Spinner />}>
+                    <Show when={data()}>
+                        <BubbleBlock>
+                            <div class="bubble">
+                                <Caption
+                                    mainText={data().title}
+                                    fontSize="24px"
+                                    padding="0 0 20px"
+                                />
+                                <ListRows>
+                                    <Row
+                                        description={`Авторы: ${data().reward}`}
+                                        onClick={() => {}}
+                                    />
+                                    <Row
+                                        description={`Сборник: ${data().level}`}
+                                        onClick={() => {}}
+                                    />
+                                    <Row
+                                        description={`Город публикации: ${data().date}`}
+                                        onClick={() => {}}
+                                    />
+                                    <Row
+                                        description={`Издательство: ${data().title}`}
+                                        onClick={() => {}}
+                                    />
+                                    
+                                </ListRows>
+                                <div class="button-group">
+                                    {/* <Button
+                                        type={buttonTypeByIndexation(data().indexation)}
+                                        onClick={() => {}}
+                                    >
+                                        {data().indexation}
+                                    </Button>
+                                    <Button
+                                        type={buttonTypeByArticleStatus(data().status)}
+                                        onClick={() => {}}
+                                    >
+                                        {convertStatusArticle(data().status)}
+                                    </Button> */}
+                                </div>
+                            </div>
+                        </BubbleBlock>
+                    </Show>
+                </Suspense>
+                <LineSeparator title="источник" />
+                <Show when={data()} fallback={<Spinner />}>
+                    <Row description={`сайт: ${data().event_link}`} onClick={() => {}} />
+                </Show>
                 <Show when={data()} fallback={<Spinner />}>
                     <div class="d-flex flex-row justify-content-between align-items-center">
                         {data() && <Caption mainText={data().title} />}

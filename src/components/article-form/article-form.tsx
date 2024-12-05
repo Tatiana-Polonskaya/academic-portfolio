@@ -3,7 +3,7 @@ import { getIndexation, postArticle, putArticle } from "../../@api/api";
 import { ARTICLE_STATUS, useForm } from "../../@hooks/use-form";
 import { useNavigate } from "@solidjs/router";
 import { FormArticle } from "../../@types/article";
-import { Indexation } from "../../@types/indexation";
+import { TIndexation } from "../../@types/indexation";
 
 const currentYear = new Date().getFullYear();
 
@@ -29,7 +29,7 @@ const successEditText = "Запись обновлена!";
 const successAddText = "Запись успешно добавлена!";
 
 export default function ArticleForm(_props: Props) {
-    const [indexations, setIndexations] = createSignal<Indexation[]>([]);
+    const [indexations, setIndexations] = createSignal<TIndexation[]>([]);
 
     onMount(async () => {
         const temp = await getIndexation();

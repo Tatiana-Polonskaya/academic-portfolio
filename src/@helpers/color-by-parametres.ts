@@ -1,7 +1,7 @@
 import { ARTICLE_STATUS } from "../@hooks/use-form";
-import { ButtonType } from "../@ui/button/button";
+import { ButtonType } from "../@ui/button/type";
 
-export function buttonTypeByYear(year: string) {
+export function buttonTypeByYear(year: string): ButtonType {
     switch (year) {
         case "2020":
             return ButtonType.Green;
@@ -17,7 +17,7 @@ export function buttonTypeByYear(year: string) {
 }
 
 //заменить на бек
-export function buttonTypeByIndexation(indexation: number) {
+export function buttonTypeByIndexation(indexation: number): ButtonType {
     switch (indexation) {
         case 0:
             return ButtonType.Yellow;
@@ -30,7 +30,7 @@ export function buttonTypeByIndexation(indexation: number) {
     }
 }
 
-export function buttonTypeByArticleStatus(status: ARTICLE_STATUS) {
+export function buttonTypeByArticleStatus(status: ARTICLE_STATUS): ButtonType {
     switch (status) {
         case 0:
             return ButtonType.Yellow;
