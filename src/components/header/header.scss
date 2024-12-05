@@ -1,7 +1,6 @@
 @import "./../../@style/colors";
 @import "./../../@style/components";
 
-
 %title-text {
     @extend %text-montsserat-alternates;
     font-size: 22px;
@@ -9,19 +8,19 @@
 }
 
 .my-header {
-
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-between;
     width: 100%;
-    padding: 15px calc($side-padding + 10px);
-    border: 1px solid white;
+    padding-left: $side-padding;
+    padding-right: $side-padding;
     box-shadow: 0 2px 5px rgb(0, 0, 0, 15%);
 
     .block-title {
         flex-grow: 1;
         display: flex;
         flex-flow: row nowrap;
+        padding: 15px 15px 15px 0;
         justify-content: flex-start;
         gap: 7px;
     }
@@ -32,44 +31,28 @@
     }
 
     .links {
+
         display: flex;
         justify-content: space-between;
         gap: 50px;
         margin: 0;
 
-        .item {
-            position: relative;
+        .link {
+            padding: 15px;
             cursor: pointer;
-        }
+            @extend %title-text;
+            text-decoration: none;
+            color: $transparent-dark-violet;
 
-        .item:hover {
-            .link {
+            &:hover {
                 color: $dark-violet;
                 transition-duration: .2s;
             }
         }
 
-        .link {
-            @extend %title-text;
-            text-decoration: none;
-            color: $transparent-dark-violet;
-        }
-
-
-        .active {
+        .link.active {
             color: $dark-violet;
-        }
-
-        .active::after {
-            content: "";
-            position: absolute;
-            background-color: $main-purple;
-            height: 8px;
-            width: 130px;
-            top: 41px;
-            left: calc(100% - 120px);
-            border-radius: 20px 20px 0 0;
+            background: linear-gradient(white 80%, $transparent-purple);
         }
     }
-
 }

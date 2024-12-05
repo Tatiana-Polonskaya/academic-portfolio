@@ -13,21 +13,15 @@ export default function Header() {
             </div>
 
             <ul class="links">
-                <div class="item">
-                    <A class="link" href={Routers.Main} activeClass="active" end>
-                        Дашборд
-                    </A>
-                </div>
-                <div class="item">
-                    <A class="link" href={Routers.Articles} activeClass="active">
-                        Статьи
-                    </A>
-                </div>
-                <div class="item">
-                    <A class="link" href={Routers.Achievements} activeClass="active" end>
-                        Дипломы
-                    </A>
-                </div>
+                <A class="link" href={Routers.Main} activeClass="active" end>
+                    Дашборд
+                </A>
+                <A class="link" href={Routers.Articles} activeClass="active">
+                    Статьи
+                </A>
+                <A class="link" href={Routers.Achievements} activeClass="active" end>
+                    Дипломы
+                </A>
             </ul>
         </nav>
     );
