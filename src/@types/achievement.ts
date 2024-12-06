@@ -7,6 +7,7 @@ export type Achievement = {
     diploma_link: string;
     event_link: string;
     img: string;
+    type: number
 };
 
 export type FormAchievement = Omit<Achievement, "index">;
