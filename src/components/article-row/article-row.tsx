@@ -23,13 +23,13 @@ export const ArticleRow = (props: Props) => {
             isHover
         >
             <Button
-                type={buttonTypeByYear(props.article.year)}
+                classButton={buttonTypeByYear(props.article.year)}
                 onClick={() => props.onLableClick(props.article.year)}
             >
                 {props.article.year}
             </Button>
             <Button
-                type={buttonTypeByIndexation(props.article.indexation)}
+                classButton={buttonTypeByIndexation(props.article.indexation)}
                 onClick={() => props.onLableClick(IndexationTitles[props.article.indexation])}
             >
                 {IndexationTitles[props.article.indexation]}

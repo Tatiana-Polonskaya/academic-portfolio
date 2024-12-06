@@ -163,8 +163,8 @@ export default function ArticlesPage() {
                             value={enteredValue()}
                             onChange={setEnteredValue}
                         />
-                        <Button class="grow-btn" onClick={[setEnteredValue, ""]}>
-                            Очистить
+                        <Button onClick={[setEnteredValue, ""]}>
+                            <i class="bi bi-backspace" />
                         </Button>
                     </div>
                 </div>

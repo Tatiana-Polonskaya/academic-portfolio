@@ -10,6 +10,7 @@ import ContactBlock from "../../components/contact-block/contact-block";
 import Slider from "../../components/slider/slider";
 import { useDataInitContext } from "../../context/data-init-context";
 import { ArticleBarChartOptions, ArticleChartOption } from "../../@consts/article-chart-option";
+import { AchievementChartOption } from "../../@consts/achievement-chart-option";
 
 // все получить с бд
 const data = {
@@ -147,7 +148,12 @@ const dataPie = {
 
 // страница с выводом графиков по различным данным
 export default function MainPage() {
-    const { chartDataByArticles, barChartDataByArticles } = useDataInitContext();
+    const {
+        chartDataByArticles,
+        barChartDataByArticles,
+        chartDataByAchievements,
+        barChartDataByAchievements,
+    } = useDataInitContext();
 
     return (
         <BaseLayout isContact>
@@ -242,24 +248,19 @@ export default function MainPage() {
             <LineSeparator title="дипломы" />
             <div class="article-block">
                 <BubbleBlock>
-                    <div
-                        style={{
-                            width: "350px",
-                            height: "auto",
-                            display: "flex",
-                            "flex-flow": "column nowrap",
-                            "align-items": "center",
-                            padding: "10px 20px",
-                            gap: "20px",
-                        }}
-                    >
+                    <div class="col padding">
                         <Caption mainText="Количество дипломов" fontSize="18px" fontWeigth="600" />
-                        <MyChart options={options} data={data} type="doughnut" />
+                        <MyChart
+                            options={AchievementChartOption}
+                            data={chartDataByAchievements()}
+                            type="doughnut"
+                        />
                     </div>
                 </BubbleBlock>
 
                 <BubbleBlock class="grow">
                     <div
+                        class="col padding"
                         style={{
                             width: "100%",
                             display: "flex",

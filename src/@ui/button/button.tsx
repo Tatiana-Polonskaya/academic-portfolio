@@ -3,7 +3,7 @@ import { ButtonType } from "./type";
 import "./button.scss";
 
 type Props = {
-    type?: ButtonType;
+    classButton?: ButtonType;
     class?: string;
     children: JSX.Element | JSX.Element[];
 } & JSX.ButtonHTMLAttributes<HTMLButtonElement>;
@@ -21,11 +21,11 @@ export default function Button(_props: Props) {
             class={`button ${props.class || ""}`}
             onClick={props.onClick}
             classList={{
-                "button-purple": props.type === ButtonType.Default,
-                "button-red": props.type === ButtonType.Red,
-                "button-yellow": props.type === ButtonType.Yellow,
-                "button-cyan": props.type === ButtonType.Cyan,
-                "button-green": props.type === ButtonType.Green,
+                "button-purple": props.classButton === ButtonType.Default,
+                "button-red": props.classButton === ButtonType.Red,
+                "button-yellow": props.classButton === ButtonType.Yellow,
+                "button-cyan": props.classButton === ButtonType.Cyan,
+                "button-green": props.classButton === ButtonType.Green,
             }}
         >
             {props.children}

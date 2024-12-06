@@ -83,13 +83,13 @@ export default function SingleArticlePage() {
                                 </ListRows>
                                 <div class="button-group">
                                     <Button
-                                        type={buttonTypeByIndexation(data().indexation)}
+                                        classButton={buttonTypeByIndexation(data().indexation)}
                                         onClick={() => {}}
                                     >
                                         {data().indexation}
                                     </Button>
                                     <Button
-                                        type={buttonTypeByArticleStatus(data().status)}
+                                        classButton={buttonTypeByArticleStatus(data().status)}
                                         onClick={() => {}}
                                     >
                                         {convertStatusArticle(data().status)}
