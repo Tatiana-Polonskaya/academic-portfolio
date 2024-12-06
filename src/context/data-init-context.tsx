@@ -1,12 +1,5 @@
-import {
-    createContext,
-    createEffect,
-    createMemo,
-    onMount,
-    ParentProps,
-    useContext,
-} from "solid-js";
-import { fetchArticles } from "../@api/api";
+import { createContext, createMemo, onMount, ParentProps, useContext } from "solid-js";
+import { fetchAchievements, fetchArticles } from "../@api/api";
 import { createStore } from "solid-js/store";
 import { Article } from "../@types/article";
 import {
@@ -14,23 +7,34 @@ import {
     generateDataChartFromArticles,
 } from "./convert-articles-to-chart";
 import { ChartData } from "chart.js";
+import { Achievement } from "../@types/achievement";
+import {
+    generateDataBarChartFromAchievements,
+    generateDataChartFromAchievements,
+} from "./convert-achievements-to-chart";
 
 const initContext = {
     articles: () => [],
+    achievements: () => [],
 };
 
 type TDataInitContext = {
     articles: () => Article[];
+    achievements: () => Achievement[];
     chartDataByArticles?: () => ChartData;
     barChartDataByArticles?: () => ChartData;
+    chartDataByAchievements?: () => ChartData;
+    barChartDataByAchievements?: () => ChartData;
 };
 
 type TContextStore = {
     articles: Article[];
+    achievements: Achievement[];
 };
 
 const initStore: TContextStore = {
     articles: [],
+    achievements: [],
 };
 
 const DataInitContext = createContext<TDataInitContext>(initContext);
@@ -48,22 +52,39 @@ export function DataInitProvider(props: ParentProps) {
         return;
     });
 
+    const chartDataByAchievements = createMemo<ChartData>(() => {
+        if (store.articles.length > 0)
+            return generateDataChartFromAchievements([...store.achievements]);
+        return;
+    });
+
+    const barChartDataByAchievements = createMemo<ChartData>(() => {
+        if (store.articles.length > 0)
+            return generateDataBarChartFromAchievements([...store.achievements]);
+        return;
+    });
+
     onMount(() => {
-        // получение статей
         fetchArticles().then((response) => {
-            if (response) {
+            if (response.length) {
                 setStore("articles", response);
             }
         });
 
-        // получение дипломов
-        // конвертирование и сохранение данных для графиков
+        fetchAchievements().then((response) => {
+            if (response.length) {
+                setStore("achievements", response);
+            }
+        });
     });
 
     const value: TDataInitContext = {
         articles: () => store.articles,
+        achievements: () => store.achievements,
         chartDataByArticles,
         barChartDataByArticles,
+        chartDataByAchievements,
+        barChartDataByAchievements,
     };
 
     return <DataInitContext.Provider value={value}>{props.children}</DataInitContext.Provider>;
