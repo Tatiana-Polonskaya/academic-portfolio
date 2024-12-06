@@ -8,6 +8,8 @@ import Link from "../../@ui/link/link";
 import "./main.scss";
 import ContactBlock from "../../components/contact-block/contact-block";
 import Slider from "../../components/slider/slider";
+import { useDataInitContext } from "../../context/data-init-context";
+import { ArticleBarChartOptions, ArticleChartOption } from "../../@consts/article-chart-option";
 
 // все получить с бд
 const data = {
@@ -145,6 +147,8 @@ const dataPie = {
 
 // страница с выводом графиков по различным данным
 export default function MainPage() {
+    const { chartDataByArticles, barChartDataByArticles } = useDataInitContext();
+
     return (
         <BaseLayout isContact>
             <Caption mainText="Академическое портфолио" padding="30px 0 0 0" />
@@ -183,7 +187,13 @@ export default function MainPage() {
                             fontSize="18px"
                             fontWeigth="600"
                         />
-                        <MyChart options={options} data={data} type="doughnut" />
+                        <MyChart
+                            width={"350px"}
+                            height={"auto"}
+                            options={ArticleChartOption}
+                            data={chartDataByArticles()}
+                            type="doughnut"
+                        />
                     </div>
                 </BubbleBlock>
 
@@ -219,7 +229,12 @@ export default function MainPage() {
                             fontSize="18px"
                             fontWeigth="600"
                         />
-                        <MyChart options={optionsBar} data={dataBar} type="bar" />
+                        <MyChart
+                            width="350px"
+                            options={ArticleBarChartOptions}
+                            data={barChartDataByArticles()}
+                            type="bar"
+                        />
                     </div>
                 </BubbleBlock>
             </div>

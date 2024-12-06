@@ -10,7 +10,7 @@ export enum Indexation {
 }
 
 export const IndexationTitles = {
-    [Indexation.Vak]: "ВАК",
-    [Indexation.Rinc]: "РИНЦ",
     [Indexation.Other]: "Другое",
+    [Indexation.Rinc]: "РИНЦ",
+    [Indexation.Vak]: "ВАК",
 };
