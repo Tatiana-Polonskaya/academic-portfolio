@@ -2,6 +2,7 @@ import { defineConfig } from "vite";
 import solidPlugin from "vite-plugin-solid";
 // import devtools from 'solid-devtools/vite';
 import solidSvg from "vite-plugin-solid-svg";
+import path from "path";
 
 export default defineConfig({
     plugins: [
@@ -18,5 +19,14 @@ export default defineConfig({
     },
     build: {
         target: "esnext",
+    },
+    resolve: {
+        alias: {
+            "src": path.resolve(__dirname, "./src/"),
+            "@ui": path.resolve(__dirname, "./src/@ui"),
+            "@consts": path.resolve(__dirname, "./src/@consts"),
+            "@helpers": path.resolve(__dirname, "./src/@helpers"),
+            "@hooks": path.resolve(__dirname, "./src/@hooks"),
+        },
     },
 });

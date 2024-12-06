@@ -12,7 +12,7 @@ export type ButtonRow = {
 export type TRowProps = {
     id?: number;
     description: string;
-    onDblClick: () => void;
+    onDblClick?: () => void;
     isHover?: boolean;
 };
 
@@ -21,7 +21,7 @@ export default function Row(props: ParentProps<TRowProps>) {
         <div
             class="my-row"
             classList={{ "my-row-hovering": props.isHover }}
-            onDblClick={() => props.onDblClick()}
+            onDblClick={() => props.onDblClick?.()}
         >
             <Show when={typeof props.id === "number"}>
                 <div class="text index-part">{props.id}.</div>

@@ -4,18 +4,18 @@ import Caption from "../../components/caption/caption";
 
 import "./style.scss";
 import LineSeparator from "../../components/line-separator/line-separator";
-import InfoBuble from "../../@ui/info-buble/info-buble";
-import BubbleBlock from "../../@ui/buble-block/buble-block";
-import Link from "../../@ui/link/link";
+import InfoBuble from "@ui/info-buble/info-buble";
+import BubbleBlock from "@ui/buble-block/buble-block";
+import Link from "@ui/link/link";
 import MyChart from "../../components/chart/chart";
-import Button from "../../@ui/button/button";
+import Button from "@ui/button/button";
 import ListRows from "../../components/list-rows/list-rows";
-import Input from "../../@ui/input/input";
+import Input from "@ui/input/input";
 import { useDataInitContext } from "../../context/data-init-context";
 import {
     AchievementBarChartOptions,
     AchievementChartOption,
-} from "../../@consts/achievement-chart-option";
+} from "@consts/achievement-chart-option";
 import { Achievement } from "../../@types/achievement";
 import { changeSortType, getSortFunctionByType, SortedType } from "../../@types/sort";
 import { hasAchievementText } from "./helper";

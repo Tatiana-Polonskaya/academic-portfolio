@@ -11,7 +11,7 @@ type Props = {
 export default function Button(_props: Props) {
     const props = mergeProps(
         {
-            type: ButtonType.Default,
+            classButton: ButtonType.Default,
             children: null,
         },
         _props,
@@ -26,6 +26,7 @@ export default function Button(_props: Props) {
                 "button-yellow": props.classButton === ButtonType.Yellow,
                 "button-cyan": props.classButton === ButtonType.Cyan,
                 "button-green": props.classButton === ButtonType.Green,
+                "opacity": !!props.onClick,
             }}
         >
             {props.children}

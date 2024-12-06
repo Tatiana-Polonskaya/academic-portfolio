@@ -1,10 +1,8 @@
-import { A, useNavigate, useParams } from "@solidjs/router";
-import { Show, Suspense, createEffect, createResource, createSignal, on } from "solid-js";
-import { deleteArticleById, fetchArticleById } from "../../@api/api";
+import { useParams } from "@solidjs/router";
+import { Show, Suspense } from "solid-js";
 import BaseLayout from "../../layouts/base/base-layout";
 import Spinner from "../../components/spinner/spinner";
 import Caption from "../../components/caption/caption";
-import ButtonBack from "../../components/button-back/button-back";
 import { Routers } from "../../consts";
 import { TypeBiblio, createBiblioRecord } from "../../@helpers/bibliographic-record";
 import { convertStatusArticle } from "../../@helpers/covert-enums";
@@ -20,24 +18,22 @@ import {
     buttonTypeByArticleStatus,
     buttonTypeByIndexation,
 } from "../../@helpers/color-by-parametres";
+import { useDataInitContext } from "src/context/data-init-context";
+import { IndexationTitles } from "src/@types/indexation";
 
-//TODO: добавить обработку ошибок при удалении
-//TODO: добавить модальное окно перед удалением
-
+//TODO: сделать модалочку с уведомлением
 export default function SingleArticlePage() {
-    const navigate = useNavigate();
     const params = useParams();
+    const { getArticleById } = useDataInitContext();
 
-    const [data] = createResource(params.id, fetchArticleById);
+    const article = () => getArticleById(params.id);
 
-    const handleDeleteClick = async () => {
-        if (!params.id) return;
-        const res = await deleteArticleById(params.id);
-        if (res.ok) {
-            navigate(Routers.Articles);
-        } else {
-            console.log(res);
-        }
+    const biblioRecord = () => createBiblioRecord(TypeBiblio.ArticleFromCollection, article());
+
+    const handleCopyClick = () => {
+        navigator.clipboard.writeText(biblioRecord()).then(() => {
+            alert("Текст скопирован");
+        });
     };
 
     return (
@@ -47,52 +43,34 @@ export default function SingleArticlePage() {
                 <LineSeparator title="общая информация" />
 
                 <Suspense fallback={<Spinner />}>
-                    <Show when={data()}>
+                    <Show when={article()}>
                         <BubbleBlock>
                             <div class="bubble">
                                 <Caption
-                                    mainText={data().title}
+                                    mainText={article().title}
                                     fontSize="24px"
                                     padding="0 0 20px"
                                 />
                                 <ListRows>
+                                    <Row description={`Авторы: ${article().authors}`} />
                                     <Row
-                                        description={`Авторы: ${data().authors}`}
-                                        onClick={() => {}}
+                                        description={`Конференция/Сборник: ${article().conference}`}
                                     />
-                                    <Row
-                                        description={`Сборник: ${data().conference}`}
-                                        onClick={() => {}}
-                                    />
-                                    <Row
-                                        description={`Город публикации: ${data().index}`}
-                                        onClick={() => {}}
-                                    />
-                                    <Row
-                                        description={`Издательство: ${data().title}`}
-                                        onClick={() => {}}
-                                    />
-                                    <Row
-                                        description={`Год публикации: ${data().year}`}
-                                        onClick={() => {}}
-                                    />
-                                    <Row
-                                        description={`Страницы: ${data().pages}`}
-                                        onClick={() => {}}
-                                    />
+                                    <Row description={`Город публикации: ${article().city}`} />
+                                    <Row description={`Издательство: ${article().title}`} />
+                                    <Row description={`Год публикации: ${article().year}`} />
+                                    <Row description={`Страницы: ${article().pages}`} />
                                 </ListRows>
                                 <div class="button-group">
                                     <Button
-                                        classButton={buttonTypeByIndexation(data().indexation)}
-                                        onClick={() => {}}
+                                        classButton={buttonTypeByIndexation(article().indexation)}
                                     >
-                                        {data().indexation}
+                                        {IndexationTitles[article().indexation]}
                                     </Button>
                                     <Button
-                                        classButton={buttonTypeByArticleStatus(data().status)}
-                                        onClick={() => {}}
+                                        classButton={buttonTypeByArticleStatus(article().status)}
                                     >
-                                        {convertStatusArticle(data().status)}
+                                        {convertStatusArticle(article().status)}
                                     </Button>
                                 </div>
                             </div>
@@ -101,15 +79,19 @@ export default function SingleArticlePage() {
                 </Suspense>
                 <LineSeparator title="библиографическая запись" />
                 <BubbleBlock>
-                    <div class="bubble text copy-block" title={"скопировать"}>
-                        <Show when={data()} fallback={<Spinner />}>
-                            {createBiblioRecord(TypeBiblio.ArticleFromCollection, data())}
-                        </Show>
-                    </div>
+                    <Show when={article()}>
+                        <div
+                            class="bubble text copy-block"
+                            title={"скопировать"}
+                            onClick={handleCopyClick}
+                        >
+                            {biblioRecord()}
+                        </div>
+                    </Show>
                 </BubbleBlock>
-                <LineSeparator title="источник" />
-                <Show when={data()} fallback={<Spinner />}>
-                    <Row description={`сайт: ${data().linkArticle}`} id={1} onClick={() => {}} />
+                <Show when={article() && article().linkArticle}>
+                    <LineSeparator title="источник" />
+                    <Row description={`сайт: ${article().linkArticle}`} id={1} />
                 </Show>
             </div>
         </BaseLayout>

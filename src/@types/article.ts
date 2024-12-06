@@ -4,6 +4,7 @@ export type Article = {
     title: string;
     year: string;
     conference: string;
+    city: string;
     status: number;
     linkArticle: string;
     linkCollection: string;

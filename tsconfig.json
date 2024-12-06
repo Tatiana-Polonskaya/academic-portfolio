@@ -9,6 +9,15 @@
         "jsxImportSource": "solid-js",
         "types": ["vite-plugin-solid-svg/types-component-solid", "vite/client"],
         "noEmit": true,
-        "isolatedModules": true
+        "isolatedModules": true,
+        "baseUrl": ".",
+        "paths": {
+            "src/*": ["src/*"],
+            "@ui/*": ["src/@ui/*"],
+            "@consts/*": ["src/@consts/*"],
+            "@helpers/*": ["src/@helpers/*"],
+            "@hooks/*": ["src/@hooks/*"],
+            "@types/*": ["src/@types/*"]
+        }
     }
 }

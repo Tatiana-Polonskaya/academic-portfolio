@@ -1,11 +1,8 @@
 import "./line-separator.scss";
-import Separator from "./../../../public/separator.svg";
 
 type Props = {
     title: string;
 };
-
-// TODO: разобраться с svg
 
 export default function LineSeparator(props: Props) {
     return (

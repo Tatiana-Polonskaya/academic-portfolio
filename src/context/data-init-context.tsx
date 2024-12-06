@@ -25,6 +25,9 @@ type TDataInitContext = {
     barChartDataByArticles?: () => ChartData;
     chartDataByAchievements?: () => ChartData;
     barChartDataByAchievements?: () => ChartData;
+
+    getAchievementById?: (id: string) => Achievement;
+    getArticleById?: (id: string) => Article;
 };
 
 type TContextStore = {
@@ -78,6 +81,14 @@ export function DataInitProvider(props: ParentProps) {
         });
     });
 
+    const getAchievementById = (id: string) => {
+        return store.achievements.filter((el) => el.index === id)[0];
+    };
+
+    const getArticleById = (id: string) => {
+        return store.articles.filter((el) => el.index === id)[0];
+    };
+
     const value: TDataInitContext = {
         articles: () => store.articles,
         achievements: () => store.achievements,
@@ -85,6 +96,9 @@ export function DataInitProvider(props: ParentProps) {
         barChartDataByArticles,
         chartDataByAchievements,
         barChartDataByAchievements,
+
+        getAchievementById,
+        getArticleById,
     };
 
     return <DataInitContext.Provider value={value}>{props.children}</DataInitContext.Provider>;

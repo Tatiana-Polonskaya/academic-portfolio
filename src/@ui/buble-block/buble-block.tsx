@@ -7,5 +7,5 @@ type Props = {
 };
 
 export default function BubbleBlock(props: Props) {
-    return <div class={`buble-block ${props.class}`}>{props.children}</div>;
+    return <div class={`buble-block ${props.class || ""}`}>{props.children}</div>;
 }
