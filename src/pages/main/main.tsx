@@ -8,7 +8,10 @@ import Link from "../../@ui/link/link";
 import "./main.scss";
 import { useDataInitContext } from "../../context/data-init-context";
 import { ArticleBarChartOptions, ArticleChartOption } from "../../@consts/article-chart-option";
-import { AchievementBarChartOptions, AchievementChartOption } from "../../@consts/achievement-chart-option";
+import {
+    AchievementBarChartOptions,
+    AchievementChartOption,
+} from "../../@consts/achievement-chart-option";
 import { Routers } from "src/consts";
 import { ArticleMiniTable } from "src/components/article-mini-table/article-mini-table";
 import Slider from "src/components/slider/slider";
@@ -115,7 +118,7 @@ export default function MainPage() {
                                 textAlign="center"
                             />
                             <MyChart
-                                width={"350px"}
+                                width={"320px"}
                                 height={"auto"}
                                 options={AchievementChartOption}
                                 data={chartDataByAchievements()}
@@ -145,14 +148,15 @@ export default function MainPage() {
                     </BubbleBlock>
 
                     <BubbleBlock class="flex-grow">
-                        <div class="col padding">
+                        <div class="chart-inner">
                             <Caption
-                                mainText="Количество дипломов по годам"
+                                mainText={`Количество дипломов\n по годам`}
                                 fontSize="18px"
                                 fontWeigth="600"
+                                textAlign="center"
                             />
                             <MyChart
-                                width="350px"
+                                width="320px"
                                 options={AchievementBarChartOptions}
                                 data={barChartDataByAchievements()}
                                 type="bar"

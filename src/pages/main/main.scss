@@ -8,7 +8,7 @@
 
     .row {
         display: flex;
-        flex-flow: row wrap;
+        flex-flow: row nowrap;
     }
 
     .space-between {
@@ -18,13 +18,11 @@
 
     .grid {
         display: flex;
-        flex-flow: row wrap;
-
+        flex-flow: row nowrap;
     }
 
     .flex-grow {
         flex-grow: 1;
-
     }
 
     .chart-inner {
@@ -47,6 +45,36 @@
         max-width: 500px;
         gap: 20px;
     }
+}
 
+@media (max-width: 1300px) {
+    .main-block {
+        .row {
+            display: flex;
+            flex-flow: row wrap;
+        }
 
+        .grid {
+            display: flex;
+            flex-flow: row wrap;
+        }
+    }
+}
+
+// @media all and (orientation: landscape) {
+//     /* Target device in landscape mode */
+// }
+
+@media all and (orientation: portrait) {
+    .main-block {
+        .row {
+            display: flex;
+            flex-flow: row wrap;
+        }
+
+        .grid {
+            display: flex;
+            flex-flow: row wrap;
+        }
+    }
 }

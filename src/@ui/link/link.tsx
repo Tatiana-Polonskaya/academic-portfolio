@@ -6,11 +6,12 @@ type Props = {
     title: string;
     href: string;
     direction: "rigth" | "left";
+    target?: "_self" | "_blank";
 };
 
 export default function Link(props: Props) {
     return (
-        <A class="my-link" href={props.href}>
+        <A class="my-link" href={props.href} target={props.target || "_self"}>
             <Show when={props.direction === "left"}>
                 <i class="bi bi-arrow-left" />
             </Show>

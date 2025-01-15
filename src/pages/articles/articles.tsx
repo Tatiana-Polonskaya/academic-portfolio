@@ -93,9 +93,24 @@ export default function ArticlesPage() {
                                     fontSize="18px"
                                     fontWeigth="600"
                                 />
-                                <Link title="eLibrary" direction="rigth" href="" />
-                                <Link title="Google Scholar" direction="rigth" href="" />
-                                <Link title="Хабр" direction="rigth" href="" />
+                                <Link
+                                    title="eLibrary"
+                                    direction="rigth"
+                                    href="https://clck.ru/3FkzbE"
+                                    target="_blank"
+                                />
+                                <Link
+                                    title="Google Scholar"
+                                    direction="rigth"
+                                    href="https://clck.ru/3Fkxtg"
+                                    target="_blank"
+                                />
+                                <Link
+                                    title="Хабр"
+                                    direction="rigth"
+                                    href="https://clck.ru/3Fkxss"
+                                    target="_blank"
+                                />
                             </div>
                         </BubbleBlock>
                     </div>

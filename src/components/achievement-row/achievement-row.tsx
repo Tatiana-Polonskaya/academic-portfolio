@@ -12,15 +12,19 @@ type Props = {
     onLableClick: (year: string) => void;
 };
 
+// TODO: сделать конвертацию формата дат с англ на рус
+
 export const AchievementRow = (props: Props) => {
     const navigate = useNavigate();
+
+    console.log("props.achievement.date", props.achievement.date);
 
     const year = new Date(props.achievement.date).getFullYear().toString();
 
     return (
         <Row
             id={props.id}
-            description={props.achievement.title}
+            description={props.achievement.title + " - " + props.achievement.reward}
             onDblClick={() => navigate(Routers.Achievement.replace(":id", props.achievement.index))}
             isHover
         >
