@@ -1,4 +1,10 @@
 .buble-block {
+
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+
     border-radius: 25px;
     padding: 20px;
     background-color: white;

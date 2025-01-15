@@ -5,6 +5,6 @@
 .my-caption {
     @extend %text-montsserat-alternates;
     color: $dark-violet;
-    word-wrap: break-word;
-    text-align: start;
+
+    white-space: pre-wrap;
 }

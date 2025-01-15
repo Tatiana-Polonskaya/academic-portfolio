@@ -6,6 +6,7 @@ type Props = {
     fontSize?: string;
     fontWeigth?: string;
     padding?: string;
+    textAlign?: "start" | "center";
 };
 
 export default function Caption(_props: Props) {
@@ -13,6 +14,7 @@ export default function Caption(_props: Props) {
         {
             fontSize: "36px",
             fontWeigth: "700",
+            textAlign: "start",
             padding: "",
         },
         _props,
@@ -23,6 +25,7 @@ export default function Caption(_props: Props) {
             style={{
                 "font-size": props.fontSize,
                 "font-weight": props.fontWeigth,
+                "text-align": props.textAlign,
                 padding: props.padding,
             }}
         >
