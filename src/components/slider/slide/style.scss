@@ -1,3 +1,5 @@
+@import "./../../../@style/components";
+
 .slide {
     flex: 1 0 100%;
     position: relative;
@@ -6,11 +8,14 @@
         display: flex;
         margin: 0 auto;
         max-height: 300px;
+        min-width: 300px;
+        max-width: 500px;
         width: 100%;
         object-fit: contain;
     }
 
     .slide-title {
+        @extend %text-montsserat;
         text-align: center;
         margin-top: 10px;
     }

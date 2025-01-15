@@ -8,7 +8,7 @@ import Link from "../../@ui/link/link";
 import "./main.scss";
 import { useDataInitContext } from "../../context/data-init-context";
 import { ArticleBarChartOptions, ArticleChartOption } from "../../@consts/article-chart-option";
-import { AchievementChartOption } from "../../@consts/achievement-chart-option";
+import { AchievementBarChartOptions, AchievementChartOption } from "../../@consts/achievement-chart-option";
 import { Routers } from "src/consts";
 import { ArticleMiniTable } from "src/components/article-mini-table/article-mini-table";
 import Slider from "src/components/slider/slider";
@@ -20,6 +20,7 @@ export default function MainPage() {
         chartDataByArticles,
         barChartDataByArticles,
         chartDataByAchievements,
+        barChartDataByAchievements,
     } = useDataInitContext();
 
     const allAmount = () => achievements().length + articles().length;
@@ -73,7 +74,7 @@ export default function MainPage() {
 
                     <BubbleBlock>
                         <div class="chart-inner table">
-                            <div class="row">
+                            <div class="row space-between">
                                 <Caption
                                     mainText="Последние статьи"
                                     fontSize="18px"
@@ -123,7 +124,7 @@ export default function MainPage() {
                         </div>
                     </BubbleBlock>
 
-                    <BubbleBlock>
+                    <BubbleBlock class="grow">
                         <div class="carusel-inner">
                             <div class="row space-between">
                                 <Caption mainText="Дипломы" fontSize="18px" fontWeigth="600" />
@@ -139,6 +140,22 @@ export default function MainPage() {
                                 autoPlayTime={5000}
                                 width={"100%"}
                                 height={"100%"}
+                            />
+                        </div>
+                    </BubbleBlock>
+
+                    <BubbleBlock class="flex-grow">
+                        <div class="col padding">
+                            <Caption
+                                mainText="Количество дипломов по годам"
+                                fontSize="18px"
+                                fontWeigth="600"
+                            />
+                            <MyChart
+                                width="350px"
+                                options={AchievementBarChartOptions}
+                                data={barChartDataByAchievements()}
+                                type="bar"
                             />
                         </div>
                     </BubbleBlock>

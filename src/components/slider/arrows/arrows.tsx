@@ -8,8 +8,12 @@ export default function Arrows() {
 
     return (
         <div class="arrows">
-            <div class="arrow left" onClick={() => changeSlide(-1)} />
-            <div class="arrow right" onClick={() => changeSlide(1)} />
+            <div>
+                <i class="bi bi-caret-left-fill arrow left" onClick={() => changeSlide(-1)} />
+            </div>
+            <div>
+                <i class="bi bi-caret-right-fill arrow right" onClick={() => changeSlide(1)} />
+            </div>
         </div>
     );
 }

@@ -1,5 +1,7 @@
+@import "./../../../@style/colors";
+
 .arrows {
-    color: white;
+    color: $transparent-purple;
     display: flex;
     font-size: 30px;
     justify-content: space-between;
@@ -15,21 +17,7 @@
 
         &:hover {
             cursor: pointer;
-        }
-
-        &.left {
-            background-image: url(/arrow.png);
-            background-repeat: no-repeat;
-            background-size: contain;
-            margin-left: 5px;
-            transform: rotate(180deg);
-        }
-
-        &.right {
-            background-image: url(/arrow.png);
-            background-repeat: no-repeat;
-            background-size: contain;
-            margin-right: 5px;
+            color: $main-purple;
         }
     }
 }
