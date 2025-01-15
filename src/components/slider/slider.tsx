@@ -1,33 +1,113 @@
-import { Slider, SliderButton, SliderProvider, createSlider } from "solid-slider";
+import { createContext, createEffect, createSignal, on } from "solid-js";
 import "./slider.scss";
-import autoplay from "solid-slider/plugins/autoplay";
-import { createSignal } from "solid-js";
+import Dots from "./dots/dots";
+import Arrows from "./arrows/arrows";
+import SlidesList from "./slides-list/slides-list";
+import { Achievement } from "src/@types/achievement";
 
-export default function MySlider() {
-    const [slider, { current, next, prev, moveTo }] = createSlider();
-    slider;
+type Props = {
+    sliders: Achievement[];
+    width: string;
+    height: string;
+    autoPlay: boolean;
+    autoPlayTime: number;
+};
+
+type TContext = {
+    goToSlide: (number: number) => void;
+    changeSlide: (number: number) => void;
+    slideNumber: () => number;
+    items: () => any[];
+};
+
+export const SliderContext = createContext<TContext>();
+
+export default function Slider(props: Props) {
+    const [items, setItems] = createSignal([]);
+    const [slide, setSlide] = createSignal(0);
+
+    const [touchPosition, setTouchPosition] = createSignal(null);
+
+    createEffect(() => {
+        setItems(props.sliders);
+    });
+
+    const changeSlide = (direction = 1) => {
+        let slideNumber = 0;
+
+        if (slide() + direction < 0) {
+            slideNumber = items().length - 1;
+        } else {
+            slideNumber = (slide() + direction) % items().length;
+        }
+        setSlide(slideNumber);
+    };
+
+    const goToSlide = (number) => {
+        setSlide(number % items().length);
+    };
+
+    const handleTouchStart = (e) => {
+        const touchDown = e.touches[0].clientX;
+
+        setTouchPosition(touchDown);
+    };
+
+    const handleTouchMove = (e) => {
+        if (touchPosition === null) {
+            return;
+        }
+
+        const currentPosition = e.touches[0].clientX;
+        const direction = touchPosition() - currentPosition;
+
+        if (direction > 10) {
+            changeSlide(1);
+        }
+
+        if (direction < -10) {
+            changeSlide(-1);
+        }
+
+        setTouchPosition(null);
+    };
+
+    createEffect(
+        on(
+            () => [items.length, slide],
+            () => {
+                if (!props.autoPlay) return;
+
+                const interval = setInterval(() => {
+                    changeSlide(1);
+                }, props.autoPlayTime);
+
+                return () => {
+                    clearInterval(interval);
+                };
+            },
+        ),
+    );
+
     return (
-        <>
-            <div use:slider class="flex">
-                <div class="slide slide1">1</div>
-                <div class="slide slide2">2</div>
-                <div class="slide slide3">3</div>
-                <div class="slide slide4">4</div>
-                <div class="slide slide5">5</div>
-                <div class="slide slide6">6</div>
-            </div>
-            <br />
-            <div style={{ "text-align": "center" }}>
-                Current Slide: {current() + 1}
-                <br />
-                <button onClick={prev}>Prev</button>
-                <select onChange={(evt) => moveTo(parseInt(evt.currentTarget.value) - 1)}>
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                </select>
-                <button onClick={next}>Next</button>
-            </div>
-        </>
+        <div
+            style={{ width: props.width, height: props.height }}
+            class="slider"
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+        >
+            <SliderContext.Provider
+                value={{
+                    goToSlide,
+                    changeSlide,
+                    slideNumber: slide,
+                    items,
+                }}
+            >
+                <Arrows />
+                <SlidesList />
+                <Dots />
+            </SliderContext.Provider>
+        </div>
     );
 }
