@@ -1,0 +1,37 @@
+@import "./../../@style/colors";
+@import "./../../@style/components";
+
+
+.article-mini-table {
+    min-width: 350px;
+    // max-width: 350px;
+    display: flex;
+    flex-flow: column nowrap;
+
+    scrollbar-width: thin;
+    overflow: auto;
+
+    @extend %text-montsserat-alternates;
+    color: $dark-violet;
+    font-size: 14px;
+    font-weight: 500;
+
+    border: 5px solid $most-transparent-purple;
+    border-radius: 15px;
+
+    .row {
+        display: flex;
+        flex-flow: row nowrap;
+        padding: 5px 10px;
+
+        &:hover {
+            cursor: pointer;
+            background: $most-transparent-purple;
+            // opacity: .5;
+        }
+
+        &:not(:last-child) {
+            border-bottom: 1px solid $transparent-purple;
+        }
+    }
+}

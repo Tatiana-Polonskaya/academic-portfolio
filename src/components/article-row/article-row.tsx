@@ -9,7 +9,7 @@ import Button from "../../@ui/button/button";
 type Props = {
     id: number;
     article: Article;
-    onLableClick: (year: string) => void;
+    onLableClick?: (text: string) => void;
 };
 
 export const ArticleRow = (props: Props) => {
@@ -24,13 +24,13 @@ export const ArticleRow = (props: Props) => {
         >
             <Button
                 classButton={buttonTypeByYear(props.article.year)}
-                onClick={() => props.onLableClick(props.article.year)}
+                onClick={() => props.onLableClick?.(props.article.year)}
             >
                 {props.article.year}
             </Button>
             <Button
                 classButton={buttonTypeByIndexation(props.article.indexation)}
-                onClick={() => props.onLableClick(IndexationTitles[props.article.indexation])}
+                onClick={() => props.onLableClick?.(IndexationTitles[props.article.indexation])}
             >
                 {IndexationTitles[props.article.indexation]}
             </Button>
