@@ -1,23 +1,20 @@
-import Input from "../../@ui/input/input";
 import "./contact-block.scss";
 
 export default function ContactBlock() {
+    const email = import.meta.env.VITE_mail_contact;
+
     return (
         <div class="contact-block">
-            <p class="title">Связаться со мной</p>
+            <p class="title">Связаться со мной:</p>
             <div class="row-grow">
-                <button class="btn">
+                <a href={`mailto:${email}`} class="btn">
+                    Почта
                     <i class="bi bi-envelope" />
-                    почта
-                </button>
-                <button class="btn">
+                </a>
+                <a href={`https://t.me/${import.meta.env.VITE_telegram_name}`} class="btn">
+                    Телеграм
                     <i class="bi bi-telegram" />
-                    телеграм
-                </button>
-                <div class="form">
-                    <Input placeholder="youremail@mail.com" />
-                    <i class="bi bi-arrow-right" />
-                </div>
+                </a>
             </div>
         </div>
     );
