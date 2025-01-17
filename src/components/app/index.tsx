@@ -5,7 +5,7 @@ import SingleArticlePage from "../../pages/article/article";
 import ArticlesPage from "../../pages/articles/articles";
 
 import AchievementPage from "../../pages/achievement/achievement";
-import AchievementsPage from "../../pages/achievements/achievements-page";
+import AchievementsPage from "../../pages/achievements/achievements";
 import { DataInitProvider } from "../../context/data-init-context";
 
 const MainPage = lazy(() => import("../../pages/main/main"));

@@ -1,8 +1,23 @@
 @import "./../../@style/components";
 
 .my-base-layout {
+    min-width: 320px;
+
     .content {
         padding: 0 $side-padding;
         padding-bottom: $side-padding;
+    }
+}
+
+
+
+@media (max-width: 768px) {
+
+    .my-base-layout {
+
+        .content {
+            padding: 0 $small-side-padding;
+            padding-bottom: $small-side-padding;
+        }
     }
 }

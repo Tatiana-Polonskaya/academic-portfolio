@@ -31,11 +31,10 @@
         .button-part {
             align-self: flex-end;
 
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            display: flex;
+            flex-flow: row wrap;
             gap: 10px;
         }
-
     }
 
     .text {

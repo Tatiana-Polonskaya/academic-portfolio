@@ -116,7 +116,7 @@ export default function ArticlesPage() {
                     </div>
 
                     <BubbleBlock class="flex-grow">
-                        <div class="col padding">
+                        <div class="col">
                             <Caption
                                 mainText="Количество индексируемых статей"
                                 fontSize="18px"
@@ -133,9 +133,9 @@ export default function ArticlesPage() {
                     </BubbleBlock>
 
                     <BubbleBlock class="flex-grow">
-                        <div class="col padding">
+                        <div class="col">
                             <Caption
-                                mainText="Количество статей по годам публикации"
+                                mainText={"Количество статей\n по годам публикации"}
                                 fontSize="18px"
                                 fontWeigth="600"
                             />
@@ -199,7 +199,7 @@ export default function ArticlesPage() {
                             )}
                         </For>
                     </Show>
-                </ListRows>
+                </ListRows>     
             </div>
         </BaseLayout>
     );

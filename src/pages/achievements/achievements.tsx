@@ -95,7 +95,7 @@ export default function AchievementsPage() {
                     </div>
 
                     <BubbleBlock class="flex-grow">
-                        <div class="col padding">
+                        <div class="col">
                             <Caption
                                 mainText="Количество дипломов"
                                 fontSize="18px"
@@ -112,7 +112,7 @@ export default function AchievementsPage() {
                     </BubbleBlock>
 
                     <BubbleBlock class="flex-grow">
-                        <div class="col padding">
+                        <div class="col">
                             <Caption
                                 mainText="Количество дипломов по годам"
                                 fontSize="18px"
