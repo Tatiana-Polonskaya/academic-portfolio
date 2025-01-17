@@ -1,5 +1,5 @@
 import { createContext, createMemo, onMount, ParentProps, useContext } from "solid-js";
-import { fetchAchievements, fetchArticles } from "../@api/api";
+import { fetchAchievements, fetchArticles, PathURL } from "../@api/api";
 import { createStore } from "solid-js/store";
 import { Article } from "../@types/article";
 import {
@@ -76,7 +76,10 @@ export function DataInitProvider(props: ParentProps) {
 
         fetchAchievements().then((response) => {
             if (response.length) {
-                setStore("achievements", response);
+                setStore(
+                    "achievements",
+                    response.map((el) => ({ ...el, img: `${PathURL}${el.img}` })),
+                );
             }
         });
     });

@@ -76,7 +76,7 @@ export default function AchievementsPage() {
 
                 <LineSeparator title="статистика" />
 
-                <div class="row-wrap gap">
+                <div class="row-wrap little-gap">
                     <div class="col flex-grow gap">
                         <InfoBuble
                             title={achievements().length.toString()}

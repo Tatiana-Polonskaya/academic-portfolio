@@ -5,6 +5,7 @@ import { buttonTypeByTypeAchievement, buttonTypeByYear } from "../../@helpers/co
 import Button from "../../@ui/button/button";
 import { Achievement } from "../../@types/achievement";
 import { AchievementsTitles } from "../../@types/type-achievements";
+import { convertStringToDate } from "src/@helpers/convertStringToDate";
 
 type Props = {
     id: number;
@@ -12,14 +13,10 @@ type Props = {
     onLableClick: (year: string) => void;
 };
 
-// TODO: сделать конвертацию формата дат с англ на рус
-
 export const AchievementRow = (props: Props) => {
     const navigate = useNavigate();
 
-    console.log("props.achievement.date", props.achievement.date);
-
-    const year = new Date(props.achievement.date).getFullYear().toString();
+    const year = convertStringToDate(props.achievement.date).getFullYear().toString();
 
     return (
         <Row

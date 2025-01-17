@@ -1,6 +1,5 @@
 import { createContext, createEffect, createSignal, on } from "solid-js";
 import "./slider.scss";
-import Dots from "./dots/dots";
 import Arrows from "./arrows/arrows";
 import SlidesList from "./slides-list/slides-list";
 import { Achievement } from "src/@types/achievement";
@@ -14,10 +13,10 @@ type Props = {
 };
 
 type TContext = {
-    goToSlide: (number: number) => void;
+    // goToSlide: (number: number) => void;
     changeSlide: (number: number) => void;
     slideNumber: () => number;
-    items: () => any[];
+    items: () => Achievement[];
 };
 
 export const SliderContext = createContext<TContext>();
@@ -43,9 +42,9 @@ export default function Slider(props: Props) {
         setSlide(slideNumber);
     };
 
-    const goToSlide = (number) => {
-        setSlide(number % items().length);
-    };
+    // const goToSlide = (number) => {
+    //     setSlide(number % items().length);
+    // };
 
     const handleTouchStart = (e) => {
         const touchDown = e.touches[0].clientX;
@@ -98,7 +97,6 @@ export default function Slider(props: Props) {
         >
             <SliderContext.Provider
                 value={{
-                    goToSlide,
                     changeSlide,
                     slideNumber: slide,
                     items,
@@ -106,7 +104,6 @@ export default function Slider(props: Props) {
             >
                 <Arrows />
                 <SlidesList />
-                <Dots />
             </SliderContext.Provider>
         </div>
     );

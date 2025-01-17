@@ -2,7 +2,7 @@ import { Achievement, FormAchievement } from "../@types/achievement";
 import { Article, FormArticle } from "../@types/article";
 import { TIndexation } from "../@types/indexation";
 
-const URL = "http://127.0.0.1:8000";
+export const PathURL = "http://127.0.0.1:8000";
 const headers = { "Content-Type": "application/json; charset=utf-8" };
 
 function updateForService(data: Article | FormArticle) {
@@ -14,29 +14,29 @@ function updateForWeb(data) {
 }
 
 export async function fetchArticles(): Promise<Article[]> {
-    return fetch(`${URL}/articles`, { headers: headers }).then((response) => {
+    return fetch(`${PathURL}/articles`, { headers: headers }).then((response) => {
         return response.json();
     });
 }
 
 export async function fetchArticleById(id: string): Promise<Article> {
-    return fetch(`${URL}/articles/${id}`, { headers: headers })
+    return fetch(`${PathURL}/articles/${id}`, { headers: headers })
         .then((response) => response.json())
         .then((data) => updateForWeb(data));
 }
 
 export async function fetchAchievements(): Promise<Achievement[]> {
-    return fetch(`${URL}/achievements`, { headers: headers }).then((response) => response.json());
+    return fetch(`${PathURL}/achievements`, { headers: headers }).then((response) => response.json());
 }
 
 export async function fetchAchievementById(id: string): Promise<Achievement> {
-    return fetch(`${URL}/achievements/${id}`, { headers: headers }).then((response) =>
+    return fetch(`${PathURL}/achievements/${id}`, { headers: headers }).then((response) =>
         response.json(),
     );
 }
 
 export async function postArticle(data: FormArticle): Promise<Response> {
-    return fetch(`${URL}/articles/`, {
+    return fetch(`${PathURL}/articles/`, {
         method: "POST",
         body: JSON.stringify(updateForService(data)),
         headers: headers,
@@ -44,7 +44,7 @@ export async function postArticle(data: FormArticle): Promise<Response> {
 }
 
 export async function putArticle(id: string, data: FormArticle): Promise<Response> {
-    return fetch(`${URL}/articles/${id}`, {
+    return fetch(`${PathURL}/articles/${id}`, {
         method: "PUT",
         body: JSON.stringify(updateForService(data)),
         headers: headers,
@@ -52,13 +52,13 @@ export async function putArticle(id: string, data: FormArticle): Promise<Respons
 }
 
 export async function deleteArticleById(id: string): Promise<Response> {
-    return fetch(`${URL}/articles/${id}`, {
+    return fetch(`${PathURL}/articles/${id}`, {
         method: "DELETE",
     });
 }
 
 export async function postAchievement(data: FormAchievement): Promise<Achievement> {
-    return fetch(`${URL}/achievements`, {
+    return fetch(`${PathURL}/achievements`, {
         method: "POST",
         body: JSON.stringify(data),
         headers: headers,
@@ -66,7 +66,7 @@ export async function postAchievement(data: FormAchievement): Promise<Achievemen
 }
 
 export async function getIndexation(): Promise<TIndexation[]> {
-    return fetch(`${URL}/indexations`, { headers: headers }).then((response) => {
+    return fetch(`${PathURL}/indexations`, { headers: headers }).then((response) => {
         return response.json();
     });
 }

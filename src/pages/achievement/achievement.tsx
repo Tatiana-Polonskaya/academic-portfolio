@@ -14,13 +14,14 @@ import { buttonTypeByTypeAchievement, buttonTypeByYear } from "@helpers/color-by
 import { AchievementsTitles } from "src/@types/type-achievements";
 
 import "./achievement.scss";
+import { convertStringToDate } from "src/@helpers/convertStringToDate";
 
 export default function AchievementPage() {
     const params = useParams();
     const { getAchievementById } = useDataInitContext();
 
     const achievement = () => getAchievementById(params.id);
-    const year = () => new Date(achievement().date).getFullYear().toString();
+    const year = () => convertStringToDate(achievement().date).getFullYear().toString();
 
     return (
         <BaseLayout>

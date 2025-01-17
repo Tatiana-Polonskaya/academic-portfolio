@@ -1,3 +1,4 @@
+import { convertStringToDate } from "src/@helpers/convertStringToDate";
 import { Achievement } from "../@types/achievement";
 import { AchievementsTitles } from "../@types/type-achievements";
 
@@ -24,7 +25,7 @@ export const generateDataBarChartFromAchievements = (achievements: Achievement[]
     const uniqueYears: { [key: string]: number } = {};
 
     achievements.forEach((achievement) => {
-        const year = new Date(achievement.date).getFullYear();
+        const year = convertStringToDate(achievement.date).getFullYear();
         if (year in uniqueYears) {
             uniqueYears[year] += 1;
         } else {

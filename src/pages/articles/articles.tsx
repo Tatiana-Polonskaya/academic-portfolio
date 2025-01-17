@@ -78,11 +78,11 @@ export default function ArticlesPage() {
 
                 <LineSeparator title="статистика" />
 
-                <div class="row-wrap">
+                <div class="row-wrap little-gap">
                     <div class="col flex-grow">
                         <InfoBuble
                             title={articles().length.toString()}
-                            description="Общее количество статей"
+                            description={`Общее количество статей`}
                             class="flex-grow"
                         />
 

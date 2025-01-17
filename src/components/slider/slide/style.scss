@@ -3,6 +3,7 @@
 .slide {
     flex: 1 0 100%;
     position: relative;
+    overflow: hidden;
 
     .slide-image {
         display: flex;
@@ -17,6 +18,16 @@
     .slide-title {
         @extend %text-montsserat;
         text-align: center;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: wrap;
+        display: -webkit-box;
+
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+
+
         margin-top: 10px;
+
     }
 }
