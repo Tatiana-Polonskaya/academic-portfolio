@@ -3,9 +3,8 @@
 $side-padding: 50px;
 $small-side-padding: 20px;
 
-%text-onest {
-    font-family: "Onest";
-}
+$top-padding: 30px;
+$small-top-padding: 15px;
 
 %text-montsserat-alternates {
     font-family: "Montserrat Alternates", sans-serif;
@@ -13,20 +12,4 @@ $small-side-padding: 20px;
 
 %text-montsserat {
     font-family: "Montserrat", sans-serif;
-}
-
-.cyan-background {
-    background: $cyan;
-}
-
-.red-background {
-    background: $red;
-}
-
-.yellow-background {
-    background: $yellow;
-}
-
-.purple-background {
-    background: $main-purple;
 }

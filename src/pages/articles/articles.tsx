@@ -88,11 +88,7 @@ export default function ArticlesPage() {
 
                         <BubbleBlock class="flex-grow">
                             <div class="col link-buble">
-                                <Caption
-                                    mainText="Открытые источники"
-                                    fontSize="18px"
-                                    fontWeigth="600"
-                                />
+                                <Caption mainText="Открытые источники" class="small" />
                                 <Link
                                     title="eLibrary"
                                     direction="rigth"
@@ -117,11 +113,7 @@ export default function ArticlesPage() {
 
                     <BubbleBlock class="flex-grow">
                         <div class="col">
-                            <Caption
-                                mainText="Количество индексируемых статей"
-                                fontSize="18px"
-                                fontWeigth="600"
-                            />
+                            <Caption mainText="Количество индексируемых статей" class="small" />
                             <MyChart
                                 width={"350px"}
                                 height={"auto"}
@@ -136,8 +128,7 @@ export default function ArticlesPage() {
                         <div class="col">
                             <Caption
                                 mainText={"Количество статей\n по годам публикации"}
-                                fontSize="18px"
-                                fontWeigth="600"
+                                class="small"
                             />
                             <MyChart
                                 width="350px"
@@ -171,16 +162,12 @@ export default function ArticlesPage() {
                             }}
                         />
                     </Button>
-                    <div class="row flex-grow little-gap">
+                    <div class="flex-grow">
                         <Input
-                            class="flex-grow "
                             placeholder="Введите название статьи..."
                             value={enteredValue()}
                             onChange={setEnteredValue}
                         />
-                        <Button onClick={[setEnteredValue, ""]}>
-                            <i class="bi bi-backspace" />
-                        </Button>
                     </div>
                 </div>
 
@@ -199,7 +186,7 @@ export default function ArticlesPage() {
                             )}
                         </For>
                     </Show>
-                </ListRows>     
+                </ListRows>
             </div>
         </BaseLayout>
     );

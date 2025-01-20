@@ -31,7 +31,7 @@ export default function MainPage() {
     return (
         <BaseLayout isContact>
             <div class="main-block">
-                <Caption mainText="Академическое портфолио" padding="30px 0 0 0" />
+                <Caption mainText="Академическое портфолио" />
                 <LineSeparator title="общее" />
                 <div class="row">
                     <InfoBuble
@@ -59,12 +59,7 @@ export default function MainPage() {
                 <div class="grid">
                     <BubbleBlock>
                         <div class="chart-inner">
-                            <Caption
-                                mainText={`Количество\n индексируемых статей`}
-                                fontSize="18px"
-                                fontWeigth="600"
-                                textAlign="center"
-                            />
+                            <Caption mainText={`Количество\n индексируемых статей`} class="small" />
                             <MyChart
                                 width={"320px"}
                                 height={"auto"}
@@ -80,8 +75,8 @@ export default function MainPage() {
                             <div class="row space-between">
                                 <Caption
                                     mainText="Последние статьи"
-                                    fontSize="18px"
-                                    fontWeigth="600"
+                                    class="small"
+                                    textAlign="start"
                                 />
                                 <Link title="подробнее" direction="rigth" href={Routers.Articles} />
                             </div>
@@ -93,9 +88,7 @@ export default function MainPage() {
                         <div class="chart-inner">
                             <Caption
                                 mainText={`Количество статей\n по годам публикации`}
-                                fontSize="18px"
-                                fontWeigth="600"
-                                textAlign="center"
+                                class="small"
                             />
                             <MyChart
                                 width="320px"
@@ -111,12 +104,7 @@ export default function MainPage() {
                 <div class="row">
                     <BubbleBlock>
                         <div class="chart-inner">
-                            <Caption
-                                mainText="Количество дипломов"
-                                fontSize="18px"
-                                fontWeigth="600"
-                                textAlign="center"
-                            />
+                            <Caption mainText="Количество дипломов" class="small" />
                             <MyChart
                                 width={"320px"}
                                 height={"auto"}
@@ -130,7 +118,7 @@ export default function MainPage() {
                     <BubbleBlock class="grow">
                         <div class="carusel-inner">
                             <div class="row space-between">
-                                <Caption mainText="Дипломы" fontSize="18px" fontWeigth="600" />
+                                <Caption mainText="Дипломы" class="small" textAlign="start" />
                                 <Link
                                     title="подробнее"
                                     direction="rigth"
@@ -149,12 +137,7 @@ export default function MainPage() {
 
                     <BubbleBlock class="flex-grow">
                         <div class="chart-inner">
-                            <Caption
-                                mainText={`Количество дипломов\n по годам`}
-                                fontSize="18px"
-                                fontWeigth="600"
-                                textAlign="center"
-                            />
+                            <Caption mainText={`Количество дипломов\n по годам`} class="small" />
                             <MyChart
                                 width="320px"
                                 options={AchievementBarChartOptions}

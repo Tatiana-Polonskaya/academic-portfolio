@@ -48,7 +48,7 @@ export default function SingleArticlePage() {
                             <div class="bubble">
                                 <Caption
                                     mainText={article().title}
-                                    fontSize="24px"
+                                    class="middle"
                                     padding="0 0 20px"
                                 />
                                 <ListRows>

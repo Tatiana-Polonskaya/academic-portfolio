@@ -6,7 +6,7 @@
     flex-flow: row nowrap;
     gap: 25px;
     border-bottom: 2px solid $most-transparent-purple;
-    padding: 20px 20px;
+    padding: 20px;
 
     &:first-child {
         border-top: 2px solid $most-transparent-purple;
@@ -48,6 +48,18 @@
         &:hover {
             background: linear-gradient(0.25turn, rgba(255, 255, 255, 15%), rgba(190, 124, 255, 15%), rgba(255, 255, 255, 15%));
             cursor: pointer;
+        }
+    }
+}
+
+@media (max-width: 1300px) {
+    .my-row {
+        gap: 10px;
+        padding: 10px;
+
+        .text {
+            font-size: 14px;
+            font-weight: 600;
         }
     }
 }

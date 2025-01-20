@@ -3,29 +3,31 @@ import "./caption.scss";
 
 type Props = {
     mainText: string;
-    fontSize?: string;
-    fontWeigth?: string;
     padding?: string;
     textAlign?: "start" | "center";
+    class?: "large" | "middle" | "small";
 };
 
 export default function Caption(_props: Props) {
     const props = mergeProps(
         {
-            fontSize: "36px",
-            fontWeigth: "700",
-            textAlign: "start",
             padding: "",
+            class: "large",
+            textAlign: "center",
         },
         _props,
     );
     return (
         <h2
             class="my-caption"
+            classList={{
+                ["large-text"]: props.class === "large",
+                ["middle-text"]: props.class === "middle",
+                ["small-text"]: props.class === "small",
+                ["align-start"]: props.textAlign === "start",
+                ["align-center"]: props.textAlign === "center",
+            }}
             style={{
-                "font-size": props.fontSize,
-                "font-weight": props.fontWeigth,
-                "text-align": props.textAlign,
                 padding: props.padding,
             }}
         >

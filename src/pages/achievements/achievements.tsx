@@ -86,7 +86,7 @@ export default function AchievementsPage() {
 
                         <BubbleBlock class="flex-grow">
                             <div class="col link-buble">
-                                <Caption mainText="Мероприятия" fontSize="18px" fontWeigth="600" />
+                                <Caption mainText="Мероприятия" class="small" />
                                 <Link title="eLibrary" direction="rigth" href="" />
                                 <Link title="Google Scholar" direction="rigth" href="" />
                                 <Link title="Хабр" direction="rigth" href="" />
@@ -96,11 +96,7 @@ export default function AchievementsPage() {
 
                     <BubbleBlock class="flex-grow">
                         <div class="col">
-                            <Caption
-                                mainText="Количество дипломов"
-                                fontSize="18px"
-                                fontWeigth="600"
-                            />
+                            <Caption mainText="Количество дипломов" class="small" />
                             <MyChart
                                 width={"350px"}
                                 height={"auto"}
@@ -113,11 +109,7 @@ export default function AchievementsPage() {
 
                     <BubbleBlock class="flex-grow">
                         <div class="col">
-                            <Caption
-                                mainText="Количество дипломов по годам"
-                                fontSize="18px"
-                                fontWeigth="600"
-                            />
+                            <Caption mainText="Количество дипломов по годам" class="small" />
                             <MyChart
                                 width="350px"
                                 options={AchievementBarChartOptions}
@@ -150,16 +142,13 @@ export default function AchievementsPage() {
                             }}
                         />
                     </Button>
-                    <div class="row flex-grow little-gap">
+                    <div class="flex-grow">
                         <Input
                             class="flex-grow "
                             placeholder="Введите название мероприятия..."
                             value={enteredValue()}
                             onChange={setEnteredValue}
                         />
-                        <Button onClick={[setEnteredValue, ""]}>
-                            <i class="bi bi-backspace" />
-                        </Button>
                     </div>
                 </div>
 

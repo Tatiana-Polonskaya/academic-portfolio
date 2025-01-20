@@ -37,7 +37,7 @@ export default function AchievementPage() {
                             <div class="list-col">
                                 <Caption
                                     mainText={achievement().title}
-                                    fontSize="24px"
+                                    class="middle"
                                     padding="0 10px 20px 20px"
                                 />
                                 <ListRows>

@@ -1,10 +1,73 @@
 @import './../../@style/components';
 @import './../../@style/colors';
 
-
 .my-caption {
     @extend %text-montsserat-alternates;
     color: $dark-violet;
 
     white-space: pre-wrap;
+    width: 100%;
+
+    &.large-text {
+        font-size: 36px;
+        font-weight: 700;
+    }
+
+    &.middle-text {
+        font-size: 24px;
+        font-weight: 700;
+    }
+
+    &.small-text {
+        font-size: 18px;
+        font-weight: 600;
+    }
+
+    &.align-start {
+        text-align: start;
+    }
+
+    &.align-center {
+        text-align: center;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1300px) {
+    .my-caption {
+        &.large-text {
+            font-size: 32px;
+            font-weight: 700;
+        }
+
+        &.middle-text {
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        &.small-text {
+            font-size: 16px;
+            font-weight: 600;
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .my-caption {
+        text-align: center;
+
+        &.large-text {
+            font-size: 28px;
+            font-weight: 700;
+        }
+
+        &.middle-text {
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        &.small-text {
+            font-size: 14px;
+            font-weight: 600;
+        }
+    }
 }
