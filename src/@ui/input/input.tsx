@@ -8,11 +8,14 @@ type Props = {
 
 export default function Input(props: Props) {
     return (
-        <input
-            class={`my-input ${props.class}`}
-            placeholder={props.placeholder}
-            value={props.value}
-            onChange={(e) => props.onChange?.(e.target.value)}
-        />
+        <div class={`div-input ${props.class || ""}`}>
+            <input
+                class={`string-input`}
+                placeholder={props.placeholder}
+                value={props.value}
+                onChange={(e) => props.onChange?.(e.target.value)}
+            />
+            <i class="bi bi-backspace pointer" onClick={() => props.onChange?.("")} />
+        </div>
     );
 }
