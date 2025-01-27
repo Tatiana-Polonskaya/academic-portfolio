@@ -40,6 +40,8 @@ export const AchievementChartOption: ChartOptions = {
     layout: {
         padding: 5,
     },
+    responsive: true,
+    maintainAspectRatio: false,
 };
 
 export const AchievementBarChartOptions: ChartOptions = {
@@ -73,6 +75,7 @@ export const AchievementBarChartOptions: ChartOptions = {
     },
 
     responsive: true,
+    maintainAspectRatio: false,
     scales: {
         y: {
             display: false,

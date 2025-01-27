@@ -1,6 +1,9 @@
 import { ChartOptions } from "chart.js";
 
 export const ArticleChartOption: ChartOptions = {
+    responsive: true,
+    maintainAspectRatio: false,
+
     plugins: {
         legend: {
             labels: {
@@ -41,9 +44,9 @@ export const ArticleChartOption: ChartOptions = {
     },
 };
 
-
-
 export const ArticleBarChartOptions: ChartOptions = {
+    responsive: true,
+    maintainAspectRatio: false,
     plugins: {
         legend: {
             display: false,

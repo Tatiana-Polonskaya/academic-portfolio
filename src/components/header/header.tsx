@@ -12,6 +12,8 @@ export default function Header() {
                 <a class="brand">Мое портфолио</a>
             </div>
 
+            {/* <i class="bi bi-list"/> */}
+
             <ul class="links">
                 <A class="link" href={Routers.Main} activeClass="active" end>
                     Дашборд

@@ -22,3 +22,16 @@
         transition-duration: .3s;
     }
 }
+
+@media (max-width: 768px) {
+    .my-link {
+
+        gap: 5px;
+
+        .title {
+            @extend %text-montsserat;
+            font-size: 14px;
+            font-weight: 600;
+        }
+    }
+}

@@ -15,8 +15,7 @@ type Props = {
     data: ChartData;
     options?: ChartOptions;
     type?: keyof ChartTypeRegistry;
-    width?: string;
-    height?: string;
+    class?: string;
 };
 
 const MyChart = (_props: Props) => {
@@ -28,8 +27,7 @@ const MyChart = (_props: Props) => {
                 maintainAspectRatio: false,
             },
             type: "line",
-            width: "auto",
-            height: "auto",
+            class: "",
         },
         _props,
     );
@@ -37,7 +35,7 @@ const MyChart = (_props: Props) => {
         Chart.register(Title, Tooltip, Legend, Colors);
     });
     return (
-        <div style={{ width: props.width, height: props.height }}>
+        <div class={props.class}>
             <DefaultChart type={props.type} data={props.data} options={props.options} />
         </div>
     );

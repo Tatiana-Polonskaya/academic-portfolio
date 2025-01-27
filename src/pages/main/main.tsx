@@ -33,46 +33,36 @@ export default function MainPage() {
             <div class="main-block">
                 <Caption mainText="Академическое портфолио" />
                 <LineSeparator title="общее" />
-                <div class="row">
-                    <InfoBuble
-                        title={allAmount()}
-                        description="Общее количество показателей"
-                        class="flex-grow"
-                    />
+                <div class="grid">
+                    <InfoBuble title={allAmount()} description="Общее количество показателей" />
                     <InfoBuble
                         title={articles().length}
                         description="Общее количество научных статей"
-                        class="flex-grow"
                     />
                     <InfoBuble
                         title={achievements().length}
                         description="Общее количество технических статей"
-                        class="flex-grow"
                     />
                     <InfoBuble
                         title={achievements().length}
                         description="Общее количество полученных дипломов"
-                        class="flex-grow"
                     />
                 </div>
                 <LineSeparator title="статьи" />
-                <div class="grid">
+                <div class="articles">
                     <BubbleBlock>
-                        <div class="chart-inner">
-                            <Caption mainText={`Количество\n индексируемых статей`} class="small" />
-                            <MyChart
-                                width={"320px"}
-                                height={"auto"}
-                                options={ArticleChartOption}
-                                data={chartDataByArticles()}
-                                type="doughnut"
-                            />
-                        </div>
+                        <Caption mainText={`Количество\n индексируемых статей`} class="small" />
+                        <MyChart
+                            class="chart"
+                            options={ArticleChartOption}
+                            data={chartDataByArticles()}
+                            type="doughnut"
+                        />
                     </BubbleBlock>
 
-                    <BubbleBlock>
-                        <div class="chart-inner table">
-                            <div class="row space-between">
+                    <BubbleBlock class="double-col last-order">
+                        <div class="table">
+                            <div class="row">
                                 <Caption
                                     mainText="Последние статьи"
                                     class="small"
@@ -85,39 +75,34 @@ export default function MainPage() {
                     </BubbleBlock>
 
                     <BubbleBlock>
-                        <div class="chart-inner">
-                            <Caption
-                                mainText={`Количество статей\n по годам публикации`}
-                                class="small"
-                            />
-                            <MyChart
-                                width="320px"
-                                options={ArticleBarChartOptions}
-                                data={barChartDataByArticles()}
-                                type="bar"
-                            />
-                        </div>
+                        <Caption
+                            mainText={`Количество статей\n по годам публикации`}
+                            class="small"
+                        />
+                        <MyChart
+                            class="chart"
+                            options={ArticleBarChartOptions}
+                            data={barChartDataByArticles()}
+                            type="bar"
+                        />
                     </BubbleBlock>
                 </div>
 
                 <LineSeparator title="дипломы" />
-                <div class="row">
+                <div class="articles">
                     <BubbleBlock>
-                        <div class="chart-inner">
-                            <Caption mainText="Количество дипломов" class="small" />
-                            <MyChart
-                                width={"320px"}
-                                height={"auto"}
-                                options={AchievementChartOption}
-                                data={chartDataByAchievements()}
-                                type="doughnut"
-                            />
-                        </div>
+                        <Caption mainText="Количество дипломов" class="small" />
+                        <MyChart
+                            class="chart"
+                            options={AchievementChartOption}
+                            data={chartDataByAchievements()}
+                            type="doughnut"
+                        />
                     </BubbleBlock>
 
-                    <BubbleBlock class="grow">
+                    <BubbleBlock class="double-col last-order">
                         <div class="carusel-inner">
-                            <div class="row space-between">
+                            <div class="row">
                                 <Caption mainText="Дипломы" class="small" textAlign="start" />
                                 <Link
                                     title="подробнее"
@@ -127,24 +112,22 @@ export default function MainPage() {
                             </div>
                             <Slider
                                 sliders={achievements()}
-                                autoPlay={true}
                                 autoPlayTime={5000}
+                                autoPlay={true}
                                 width={"100%"}
                                 height={"100%"}
                             />
                         </div>
                     </BubbleBlock>
 
-                    <BubbleBlock class="flex-grow">
-                        <div class="chart-inner">
-                            <Caption mainText={`Количество дипломов\n по годам`} class="small" />
-                            <MyChart
-                                width="320px"
-                                options={AchievementBarChartOptions}
-                                data={barChartDataByAchievements()}
-                                type="bar"
-                            />
-                        </div>
+                    <BubbleBlock>
+                        <Caption mainText={`Количество дипломов\n по годам`} class="small" />
+                        <MyChart
+                            class="chart"
+                            options={AchievementBarChartOptions}
+                            data={barChartDataByAchievements()}
+                            type="bar"
+                        />
                     </BubbleBlock>
                 </div>
             </div>

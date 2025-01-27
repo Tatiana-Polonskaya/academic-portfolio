@@ -3,8 +3,6 @@
 
 
 .article-mini-table {
-    min-width: 350px;
-    // max-width: 350px;
     display: flex;
     flex-flow: column nowrap;
 
@@ -32,6 +30,17 @@
 
         &:not(:last-child) {
             border-bottom: 1px solid $transparent-purple;
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .article-mini-table {
+        font-size: 12px;
+        font-weight: 400;
+
+        .row {
+            padding: 5px;
         }
     }
 }

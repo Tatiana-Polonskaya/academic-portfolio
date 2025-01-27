@@ -89,12 +89,7 @@ export default function Slider(props: Props) {
     );
 
     return (
-        <div
-            style={{ width: props.width, height: props.height }}
-            class="slider"
-            onTouchStart={handleTouchStart}
-            onTouchMove={handleTouchMove}
-        >
+        <div class="slider" onTouchStart={handleTouchStart} onTouchMove={handleTouchMove}>
             <SliderContext.Provider
                 value={{
                     changeSlide,
